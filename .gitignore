@@ -1,0 +1,7 @@
+# Ignore environment config
+.env
+
+# Ignore SQLite database files
+*.db
+
+backend/target

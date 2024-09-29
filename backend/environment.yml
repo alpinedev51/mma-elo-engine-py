@@ -17,3 +17,10 @@ dependencies:
   - numexpr
   - bottleneck
   - python-kaleido
+  - fastapi
+  - uvicorn
+  - SQLAlchemy
+  - psycopg2-binary
+  - psycopg2
+  - database
+  - pythondotenv

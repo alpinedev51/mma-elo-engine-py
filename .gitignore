@@ -3,5 +3,3 @@
 
 # Ignore SQLite database files
 *.db
-
-backend/app/create_database.py

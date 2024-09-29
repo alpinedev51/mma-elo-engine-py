@@ -8,7 +8,7 @@ class FighterResponse(FighterBase):
     id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class FightBase(BaseModel):
     fighter_1_id: int
@@ -20,4 +20,4 @@ class FightResponse(FightBase):
     id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True

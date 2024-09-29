@@ -24,3 +24,4 @@ dependencies:
   - psycopg2
   - database
   - pythondotenv
+  - Scrapy

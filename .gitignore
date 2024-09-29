@@ -4,4 +4,4 @@
 # Ignore SQLite database files
 *.db
 
-backend/target
+backend/app/create_database.py

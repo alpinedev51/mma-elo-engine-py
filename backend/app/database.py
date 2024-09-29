@@ -16,6 +16,13 @@ Base = declarative_base()
 # Function to create the database tables
 def init_db():
     Base.metadata.create_all(bind=engine)
+    
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 if __name__ == "__main__":
     init_db()  # Create the database tables

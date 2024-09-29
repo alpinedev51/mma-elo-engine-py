@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from .models import Fighter, Fight
-from .schemas import FighterBase, FightBase
+from models import Fighter, Fight
+from schemas import FighterBase, FightBase
 
 def get_fighter(db: Session, fighter_id: int):
     return db.query(Fighter).filter(Fighter.id == fighter_id).first()

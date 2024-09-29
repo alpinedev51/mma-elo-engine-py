@@ -3,5 +3,3 @@
 
 # Ignore SQLite database files
 *.db
-
-backend/target

@@ -30,7 +30,7 @@ Where:
 - $E :=$ Expected score, calculated using the following formula:
 
 $$
-\big E = \frac{1}{1 + 10^{(R_{opponent} - R) / 400}}
+E = \frac{1}{1 + 10^{(R_{opponent} - R) / 400}}
 $$
 
 - $R_{opponent}:=$ Rating of the opponent

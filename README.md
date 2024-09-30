@@ -70,8 +70,8 @@ flowchart TD
 
     subgraph Processing
         B1 --> C1[Weekly ELO Calculation]
-        C1 --> B1  %% Updates Database with ELO Scores
-        A1 --> B1  %% Spiders add new data to PostgreSQL weekly
+        C1 --> B1
+        A1 --> B1
     end
 
     subgraph API

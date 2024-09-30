@@ -22,6 +22,5 @@ dependencies:
   - SQLAlchemy
   - psycopg2-binary
   - psycopg2
-  - database
   - python-dotenv
   - Scrapy

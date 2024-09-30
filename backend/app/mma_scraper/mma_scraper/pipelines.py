@@ -39,6 +39,7 @@ class MmaScraperPipeline:
         adapter = ItemAdapter(item)
 
         # Handle Event
+        # If Event isn't already in Event table, then add to table.
         event_name = adapter.get("event")
         event = self.session.query(Event).filter_by(event=event_name).first()
         if not event:

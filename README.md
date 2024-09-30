@@ -71,7 +71,6 @@ flowchart TD
     subgraph Processing
         B1 --> C1[Weekly ELO Calculation]
         C1 --> B1
-        A1 --> B1
     end
 
     subgraph API

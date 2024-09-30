@@ -2,6 +2,7 @@ import scrapy
 
 class UFCSpider(scrapy.Spider):
     name = "ufc"
+    allowed_domains = ["ufcstats.com"]
     start_urls = ["http://ufcstats.com/statistics/events/completed"]
     
     def parse(self, response):

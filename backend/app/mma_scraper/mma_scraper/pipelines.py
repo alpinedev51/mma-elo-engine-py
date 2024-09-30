@@ -5,9 +5,68 @@
 
 
 # useful for handling different item types with a single interface
+import sys
+import os
+
+# Add the app directory to sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '../', 'app')))
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine
 from itemadapter import ItemAdapter
+from models import Fighter, Fight, Event
 
 
 class MmaScraperPipeline:
+    def __init__(self, database_url):
+        self.database_url = database_url
+        self.engine = create_engine(self.database_url)
+        self.Session = sessionmaker(bind=self.engine)
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        return cls(
+            database_url=crawler.settings.get("DATABASE_URL"),
+        )
+
+    def open_spider(self, spider):
+        self.session = self.Session()
+
+    def close_spider(self, spider):
+        self.session.commit()  # Commit any remaining changes
+        self.session.close()
+
     def process_item(self, item, spider):
+        adapter = ItemAdapter(item)
+
+        # Handle Event
+        event_name = adapter.get("event")
+        event = self.session.query(Event).filter_by(event=event_name).first()
+        if not event:
+            event = Event(event=event_name)
+            self.session.add(event)
+
+        # Handle Fighters
+        fighter_1_name = adapter.get("fighter_1")
+        fighter_2_name = adapter.get("fighter_2")
+
+        fighter_1 = self.session.query(Fighter).filter_by(name=fighter_1_name).first()
+        if not fighter_1:
+            fighter_1 = Fighter(name=fighter_1_name, elo_rating=adapter.get("fighter_1_elo"))
+            self.session.add(fighter_1)
+
+        fighter_2 = self.session.query(Fighter).filter_by(name=fighter_2_name).first()
+        if not fighter_2:
+            fighter_2 = Fighter(name=fighter_2_name, elo_rating=adapter.get("fighter_2_elo"))
+            self.session.add(fighter_2)
+
+        # Handle Fight
+        fight = Fight(
+            fighter_1_id=fighter_1.id,
+            fighter_2_id=fighter_2.id,
+            result=adapter.get("result"),
+            method=adapter.get("method"),
+            event=event.event  # Use event name to link
+        )
+        self.session.add(fight)
+
         return item

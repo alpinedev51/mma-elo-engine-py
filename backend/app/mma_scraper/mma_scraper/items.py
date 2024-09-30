@@ -4,9 +4,13 @@
 # https://docs.scrapy.org/en/latest/topics/items.html
 
 import scrapy
+from scrapy import Field
 
 
-class MmaScraperItem(scrapy.Item):
+class FightItem(scrapy.Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+    event_name = scrapy.Field()
+    fighter_1 = scrapy.Field()
+    fighter_2 = scrapy.Field()
+    result = scrapy.Field()
+    method = scrapy.Field()

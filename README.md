@@ -59,7 +59,6 @@ By incorporating ELO ratings into your MMA database, you provide users with a po
 
 ```mermaid
 flowchart TD
-    %% Scrapy Spiders -> Item Pipelines -> PostgreSQL -> ELO -> API -> React
 
     subgraph Scraping
         A1[Scrapy Spiders] --> A2[Item Pipelines]
@@ -83,7 +82,6 @@ flowchart TD
         D1 --> E1[React Website]
     end
 
-    %% Additional Descriptions
     click A1 "Scrapy Spiders regularly crawl MMA websites for fighter data."
     click A2 "Pipelines process and store the fighter data into the database."
     click B1 "PostgreSQL database houses fighter data and ELO scores."
@@ -91,7 +89,6 @@ flowchart TD
     click D1 "APIs provide access to stored data."
     click E1 "Data is displayed on a React-based frontend."
 
-    %% Styling for better readability
     classDef blue fill:#B3E5FC,stroke:#0288D1,stroke-width:2px;
     classDef green fill:#C8E6C9,stroke:#388E3C,stroke-width:2px;
     classDef orange fill:#FFE0B2,stroke:#F57C00,stroke-width:2px;

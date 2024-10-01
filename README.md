@@ -145,5 +145,5 @@ The data flow in this project can be summarized as follows:
    - Retrieving fight history.
    - Accessing event details.
 
-## Conclusion
-The MMA ELO Engine is not just a ranking system; it’s a step towards a more analytical approach to understanding fighter performance in mixed martial arts. By combining the ELO rating system with modern data collection and API technologies, this project aims to bring clarity to the conversation about who truly deserves the title of "the best fighter."
+## References
+- TODO

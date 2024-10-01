@@ -7,9 +7,9 @@
 # useful for handling different item types with a single interface
 import sys
 import os
-
 # Add the app directory to sys.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '../', 'app')))
+
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from itemadapter import ItemAdapter

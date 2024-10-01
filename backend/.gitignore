@@ -1,7 +1,6 @@
 # Ignore environment config
 .env
 
-# Ignore SQLite database files
-*.db
-
 **/__pycache__
+
+**/create_database.py

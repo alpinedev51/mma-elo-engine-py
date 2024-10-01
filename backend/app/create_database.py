@@ -11,7 +11,6 @@ DB_HOST = os.getenv("DATABASE_HOST")
 DB_PORT = os.getenv("DATABASE_PORT")
 SUPER_DB = os.getenv("SUPER_DATABASE")
 DB_NAME = os.getenv("DATABASE_NAME")
-hhhh
  
 # connection establishment
 conn = psycopg2.connect(

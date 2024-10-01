@@ -1,5 +1,7 @@
 # MMA ELO Engine
 
+- Currently working on implementing the backend in Rust.
+
 ## Introduction
 The MMA ELO Engine is a powerful tool designed to answer the age-old question: "Who is the best fighter?" In the world of mixed martial arts (MMA), rankings can often be subjective and hotly debated. Our project leverages the ELO rating system, traditionally used in chess, to objectively evaluate fighters' performance based on head-to-head contests. By scraping data from various MMA organizations, we calculate ELO scores that provide a quantifiable measure of a fighter's skill level. This engine not only aids in ranking fighters but also fuels discussions about their abilities, making the conversation about "the best" more data-driven and insightful.
 

@@ -4,3 +4,5 @@
 **/__pycache__
 
 **/create_database.py
+
+app/mma_scraper/scrapy.log

@@ -6,11 +6,11 @@
 import scrapy
 
 class FightInfoItem(scrapy.Item):
-    event_name_info=scrapy.Field(),
-    fighter_1_name_info=scrapy.Field(),
-    fighter_2_name_info=scrapy.Field(),
-    result_info=scrapy.Field(),
-    method_info=scrapy.Field()
+    event_name_info = scrapy.Field()
+    fighter_1_name_info = scrapy.Field()
+    fighter_2_name_info = scrapy.Field()
+    result_info = scrapy.Field()
+    method_info = scrapy.Field()
 
 class EventItem(scrapy.Item):
     event_name = scrapy.Field()

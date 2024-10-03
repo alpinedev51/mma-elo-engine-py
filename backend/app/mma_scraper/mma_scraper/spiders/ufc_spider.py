@@ -26,12 +26,11 @@ class UFCSpider(scrapy.Spider):
         if fight_table:
             for fight_row in fight_table.css("tr"):
                 fight_data = fight_row.css("td")
-                
                 if len(fight_data) >= 8:
-                    fighter_1 = fight_data[1].css("p:nth-child(1)::text").get().strip()  # First fighter name
-                    fighter_2 = fight_data[1].css("p:nth-child(2)::text").get().strip()  # Second fighter name
-                    result = fight_data[0].css("::text").get().strip()  # Win/Loss
-                    method = fight_data[7].css("::text").get().strip()  # Method of victory
+                    fighter_1 = fight_data[1].css("p:nth-of-type(1) a::text").get().strip()  # First fighter name
+                    fighter_2 = fight_data[1].css("p:nth-of-type(2) a::text").get().strip()  # Second fighter name
+                    result = fight_data[0].css("a.b-flag .b-flag__text::text").get().strip()  # Win/Loss
+                    method = fight_data[7].css("p:nth-of-type(1)::text").get().strip()  # Method of victory
 
                     # Yield a Scrapy item to be processed by the pipeline
                     fight_info_item = FightInfoItem(

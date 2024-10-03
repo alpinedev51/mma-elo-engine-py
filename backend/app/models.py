@@ -7,15 +7,15 @@ class Fighter(Base):
     __tablename__ = "fighters"
     
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String(255), unique=True, index=True)
-    elo = Column(Float, nullable=False)
+    fighter_name = Column(String(255), unique=True, index=True)
+    elo_rating = Column(Float, nullable=False)
 
     # Relationship to the fights
-    fights_as_fighter_1 = relationship("Fight", back_populates="fighter_1", foreign_keys="Fight.fighter_1_id")
-    fights_as_fighter_2 = relationship("Fight", back_populates="fighter_2", foreign_keys="Fight.fighter_2_id")
+    fights_as_fighter_1 = relationship("Fight", back_populates="fighter_1_relationship", foreign_keys="Fight.fighter_1_id")
+    fights_as_fighter_2 = relationship("Fight", back_populates="fighter_2_relationship", foreign_keys="Fight.fighter_2_id")
     
     def __repr__(self):
-        return f"<Fighter(name={self.name}, elo={self.elo_rating})>"
+        return f"<Fighter(name={self.fighter_name}, elo={self.elo_rating})>"
 
 class Event(Base):
     __tablename__ = "events"
@@ -27,7 +27,7 @@ class Event(Base):
     fights_relationship = relationship("Fight", back_populates="event_relationship")
     
     def __repr__(self):
-        return f"<Event(name={self.event})>"
+        return f"<Event(name={self.event_name})>"
 
 # Define the Fight model
 class Fight(Base):

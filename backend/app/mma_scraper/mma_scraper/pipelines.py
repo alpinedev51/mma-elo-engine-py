@@ -41,9 +41,9 @@ class MmaScraperPipeline:
         # Handle Event
         # If Event isn't already in Event table, then add to table.
         event_name = adapter.get("event_name_info")
-        event = self.session.query(Event).filter_by(event=event_name).first()
+        event = self.session.query(Event).filter_by(event_name=event_name).first()
         if not event:
-            event = Event(event=event_name)
+            event = Event(event_name=event_name)
             self.session.add(event)
             self.session.commit()
 
@@ -51,15 +51,15 @@ class MmaScraperPipeline:
         fighter_1_name = adapter.get("fighter_1_name_info")
         fighter_2_name = adapter.get("fighter_2_name_info")
 
-        fighter_1 = self.session.query(Fighter).filter_by(name=fighter_1_name).first()
+        fighter_1 = self.session.query(Fighter).filter_by(fighter_name=fighter_1_name).first()
         if not fighter_1:
-            fighter_1 = Fighter(name=fighter_1_name, elo_rating=1000)
+            fighter_1 = Fighter(fighter_name=fighter_1_name, elo_rating=1000)
             self.session.add(fighter_1)
             self.session.commit()
 
-        fighter_2 = self.session.query(Fighter).filter_by(name=fighter_2_name).first()
+        fighter_2 = self.session.query(Fighter).filter_by(fighter_name=fighter_2_name).first()
         if not fighter_2:
-            fighter_2 = Fighter(name=fighter_2_name, elo_rating=1000)
+            fighter_2 = Fighter(fighter_name=fighter_2_name, elo_rating=1000)
             self.session.add(fighter_2)
             self.session.commit()
 
@@ -69,7 +69,7 @@ class MmaScraperPipeline:
             fighter_2_id=fighter_2.id,
             result=adapter.get("result_info"),
             method=adapter.get("method_info"),
-            event=event.id
+            event_id=event.id
         )
         self.session.add(fight)
         self.session.commit()

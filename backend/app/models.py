@@ -21,7 +21,7 @@ class Event(Base):
     __tablename__ = "events"
     
     id = Column(Integer, primary_key=True, index=True)
-    event = Column(String, unique=True)
+    event_name = Column(String, unique=True)
     
     # Establish relationship with fights
     fights_relationship = relationship("Fight", back_populates="event_relationship")

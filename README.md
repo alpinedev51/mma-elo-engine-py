@@ -1,5 +1,6 @@
 # MMA ELO Engine
 
+[Updates]
 - Currently working on implementing the backend in Rust.
 
 ## Introduction

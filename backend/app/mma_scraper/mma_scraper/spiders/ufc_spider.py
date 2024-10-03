@@ -1,8 +1,8 @@
 import scrapy
-from items import FightItem
+from mma_scraper.items import FightInfoItem
 
 class UFCSpider(scrapy.Spider):
-    name = "ufc"
+    name = "ufc_spider"
     allowed_domains = ["ufcstats.com"]
     start_urls = ["http://ufcstats.com/statistics/events/completed"]
     
@@ -34,12 +34,12 @@ class UFCSpider(scrapy.Spider):
                     method = fight_data[7].css("::text").get().strip()  # Method of victory
 
                     # Yield a Scrapy item to be processed by the pipeline
-                    fight_item = FightItem(
-                        event_name=event_name,
-                        fighter_1=fighter_1,
-                        fighter_2=fighter_2,
-                        result=result,
-                        method=method
+                    fight_info_item = FightInfoItem(
+                        event_name_info=event_name,
+                        fighter_1_name_info=fighter_1,
+                        fighter_2_name_info=fighter_2,
+                        result_info=result,
+                        method_info=method
                     )
                     
-                    yield fight_item
+                    yield fight_info_item

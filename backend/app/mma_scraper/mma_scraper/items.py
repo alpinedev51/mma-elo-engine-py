@@ -4,7 +4,13 @@
 # https://docs.scrapy.org/en/latest/topics/items.html
 
 import scrapy
-from scrapy import Field
+
+class FightInfoItem(scrapy.Item):
+    event_name_info=scrapy.Field(),
+    fighter_1_name_info=scrapy.Field(),
+    fighter_2_name_info=scrapy.Field(),
+    result_info=scrapy.Field(),
+    method_info=scrapy.Field()
 
 class EventItem(scrapy.Item):
     event_name = scrapy.Field()

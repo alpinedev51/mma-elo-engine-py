@@ -40,7 +40,7 @@ class MmaScraperPipeline:
 
         # Handle Event
         # If Event isn't already in Event table, then add to table.
-        event_name = adapter.get("event")
+        event_name = adapter.get("event_name_info")
         event = self.session.query(Event).filter_by(event=event_name).first()
         if not event:
             event = Event(event=event_name)
@@ -48,8 +48,8 @@ class MmaScraperPipeline:
             self.session.commit()
 
         # Handle Fighters
-        fighter_1_name = adapter.get("fighter_1")
-        fighter_2_name = adapter.get("fighter_2")
+        fighter_1_name = adapter.get("fighter_1_name_info")
+        fighter_2_name = adapter.get("fighter_2_name_info")
 
         fighter_1 = self.session.query(Fighter).filter_by(name=fighter_1_name).first()
         if not fighter_1:
@@ -67,8 +67,8 @@ class MmaScraperPipeline:
         fight = Fight(
             fighter_1_id=fighter_1.id,
             fighter_2_id=fighter_2.id,
-            result=adapter.get("result"),
-            method=adapter.get("method"),
+            result=adapter.get("result_info"),
+            method=adapter.get("method_info"),
             event=event.id
         )
         self.session.add(fight)

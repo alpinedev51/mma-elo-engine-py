@@ -155,4 +155,5 @@ The data flow in this project can be summarized as follows:
    - Accessing event details.
 
 ## References
-- TODO
+### Inspired by:
+[UFC-Elo-Engine](https://github.com/NBAtrev/UFC-Elo-Engine) by Trevor Hicks.

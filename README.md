@@ -16,7 +16,7 @@ The MMA ELO Engine is a tool designed to help answer the age-old question: "Who 
 
 #### What is ELO?
 
-ELO is a rating system used to calculate the relative skill levels of players in two-player games such as chess, and more recently, in combat sports like MMA. It provides a dynamic way to rank competitors based on their performance against one another.
+ELO is a rating system used to calculate the relative skill levels of players in two-player games such as chess, and in some cases, in combat sports like MMA. It provides a way to rank competitors based on their performance against one another.
 
 #### Origins of ELO
 

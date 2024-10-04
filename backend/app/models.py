@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey
+from sqlalchemy import Column, Integer, String, Float, ForeignKey, Date
 from sqlalchemy.orm import relationship
 from database import Base
 
@@ -15,19 +15,20 @@ class Fighter(Base):
     fights_as_fighter_2 = relationship("Fight", back_populates="fighter_2_relationship", foreign_keys="Fight.fighter_2_id")
     
     def __repr__(self):
-        return f"<Fighter(name={self.fighter_name}, elo={self.elo_rating})>"
+        return f"<Fighter(name={self.fighter_name}, elo_rating={self.elo_rating})>"
 
 class Event(Base):
     __tablename__ = "events"
     
     id = Column(Integer, primary_key=True, index=True)
     event_name = Column(String, unique=True)
+    event_date = Column(Date)
     
     # Establish relationship with fights
     fights_relationship = relationship("Fight", back_populates="event_relationship")
     
     def __repr__(self):
-        return f"<Event(name={self.event_name})>"
+        return f"<Event(name={self.event_name}, event_date={self.event_date})>"
 
 # Define the Fight model
 class Fight(Base):

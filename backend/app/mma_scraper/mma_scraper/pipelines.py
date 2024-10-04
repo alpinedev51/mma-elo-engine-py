@@ -38,16 +38,17 @@ class MmaScraperPipeline:
     def process_item(self, item, spider):
         adapter = ItemAdapter(item)
 
-        # Handle Event
-        # If Event isn't already in Event table, then add to table.
+        # handle events
+        # If event isn't already in Event table, then add to table
         event_name = adapter.get("event_name_info")
+        event_date = adapter.get("event_date_info")
         event = self.session.query(Event).filter_by(event_name=event_name).first()
         if not event:
-            event = Event(event_name=event_name)
+            event = Event(event_name=event_name, event_date=event_date)
             self.session.add(event)
             self.session.commit()
 
-        # Handle Fighters
+        # handle fighters
         fighter_1_name = adapter.get("fighter_1_name_info")
         fighter_2_name = adapter.get("fighter_2_name_info")
 
@@ -63,7 +64,7 @@ class MmaScraperPipeline:
             self.session.add(fighter_2)
             self.session.commit()
 
-        # Handle Fight
+        # handle fights
         fight = Fight(
             fighter_1_id=fighter_1.id,
             fighter_2_id=fighter_2.id,

@@ -1,32 +1,39 @@
 import scrapy
 from mma_scraper.items import FightInfoItem
+from datetime import datetime
 
 class UFCSpider(scrapy.Spider):
     name = "ufc_spider"
     allowed_domains = ["ufcstats.com"]
-    start_urls = ["http://ufcstats.com/statistics/events/completed"]
+    start_urls = ["http://ufcstats.com/statistics/events/completed?page=all"]
     
     def parse(self, response):
+        # get all dates of the page that follow a valid event
+        date_strings = response.xpath('//a[@class="b-link b-link_style_black"]/following-sibling::span[@class="b-statistics__date"]/text()').getall()
         # Loop directly over the elements that contain the event names and links
-        for event in response.css("a.b-link.b-link_style_black"):
+        for idx, event in enumerate(response.css("a.b-link.b-link_style_black")):
             event_name = event.css("::text").get().strip(),
             event_link = event.attrib["href"]
+            # use XPath instead to target the span only when the a tag above it has the correct class
+            date_string = date_strings[idx].strip()
+            event_date = datetime.strptime(date_string, "%B %d, %Y").date()
             
             # Make a request to scrape fight details using the event link
             yield scrapy.Request(
                 url=event_link, 
                 callback=self.parse_fights, 
-                meta={'event_name': event_name}
+                meta={"event_name": event_name, "event_date": event_date}
             )
             
-        url_to_all = response.css('a.b-statistics__paginate-link[href*="?page=all"]::attr(href)').get()
-        yield scrapy.Request(
-            url=url_to_all,
-            callback=self.parse
-        )
+        #url_to_all = response.css('a.b-statistics__paginate-link[href*="?page=all"]::attr(href)').get()
+        #yield scrapy.Request(
+        #    url=url_to_all,
+        #    callback=self.parse
+        #)
     
     def parse_fights(self, response):
-        event_name = response.meta['event_name']
+        event_name = response.meta["event_name"]
+        event_date = response.meta["event_date"]
         fight_table = response.css("tbody")
 
         if fight_table:
@@ -44,7 +51,8 @@ class UFCSpider(scrapy.Spider):
                         fighter_1_name_info=fighter_1,
                         fighter_2_name_info=fighter_2,
                         result_info=result,
-                        method_info=method
+                        method_info=method,
+                        event_date_info=event_date
                     )
                     
                     yield fight_info_item

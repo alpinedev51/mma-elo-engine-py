@@ -18,6 +18,15 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y libarchive-dev
+    - name: Check libarchive installation
+      run: |
+        ldconfig -p | grep libarchive
+    - name: Create symlink for libarchive
+      run: |
+        sudo ln -s /usr/lib/x86_64-linux-gnu/libarchive.so.13 /usr/lib/x86_64-linux-gnu/libarchive.so.20
+    - name: Set library path
+      run: |
+        export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
     - name: Add conda to system path
       run: |
         # $CONDA is an environment variable pointing to the root of the miniconda directory

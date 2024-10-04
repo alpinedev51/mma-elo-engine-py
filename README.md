@@ -27,19 +27,19 @@ The ELO rating system was developed by Arpad Elo, a Hungarian-American physics p
 The ELO rating system calculates a player’s new rating based on the following formula:
 
 $$
-R_{new} = R + k (S - E_{S})
+R_{new} = R_{current} + k (S - E_{S})
 $$
 
 Where:
 
 - $R_{new} :=$ New rating
-- $R :=$ Current rating
+- $R_{current} :=$ Current rating
 - $k :=$ Development coefficient (a constant that determines how much a player's rating can change after each match)
 - $S :=$ Actual score (1 for a win, 0 for a loss, and 0.5 for a draw)
 - $E_{S} :=$ Expected score, calculated using the following formula:
 
 $$
-E_{S} = \frac{1}{1 + 10^{(R_{opponent} - R) / 400}}
+E_{S} = \frac{1}{1 + 10^{(R_{opponent} - R_{current}) / 400}}
 $$
 
 - $R_{opponent}:=$ Rating of the opponent

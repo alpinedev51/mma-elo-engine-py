@@ -1,8 +1,9 @@
 from pydantic import BaseModel
+from datetime import datetime
 
 class FighterBase(BaseModel):
-    name: str
-    elo: float
+    fighter_name: str
+    elo_rating: float
 
 class FighterResponse(FighterBase):
     id: int
@@ -18,7 +19,8 @@ class FightBase(BaseModel):
     event_id: int
 
 class EventBase(BaseModel):
-    event: str
+    event_name: str
+    event_date: datetime
     
 class EventResponse(EventBase):
     id: int

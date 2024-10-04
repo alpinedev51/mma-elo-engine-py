@@ -156,4 +156,4 @@ The data flow in this project can be summarized as follows:
 
 ## References
 ### Inspired by:
-[UFC-Elo-Engine](https://github.com/NBAtrev/UFC-Elo-Engine) by Trevor Hicks.
+[UFC-Elo-Engine](https://github.com/NBAtrev/UFC-Elo-Engine) created by Trevor Hicks.

@@ -18,6 +18,12 @@ class UFCSpider(scrapy.Spider):
                 callback=self.parse_fights, 
                 meta={'event_name': event_name}
             )
+            
+        url_to_all = response.css('a.b-statistics__paginate-link[href*="?page=all"]::attr(href)').get()
+        yield scrapy.Request(
+            url=url_to_all,
+            callback=self.parse
+        )
     
     def parse_fights(self, response):
         event_name = response.meta['event_name']

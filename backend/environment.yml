@@ -1,4 +1,4 @@
-name: ufc_elo_engine
+name: mma_elo_engine
 channels:
   - defaults
   - conda-forge
@@ -24,3 +24,4 @@ dependencies:
   - psycopg2
   - python-dotenv
   - Scrapy
+  - lxml=5.3.0 # 5.2 is installed by default but doesn't work

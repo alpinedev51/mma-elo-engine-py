@@ -7,7 +7,7 @@
 - Scraping is working (Scrapy).
 - Data is updated and stored in PostgreSQL database (locally).
 - ELO scores are all at 1000.
-- ELO script for using tables to update fighter ELO is WIP.
+- ELO engine for using tables to update fighter ELO is a WIP.
 
 ## Introduction
 The MMA ELO Engine is a tool designed to help answer the age-old question: "Who is the best fighter?" In the world of mixed martial arts (MMA), rankings can often be subjective and hotly debated. This project leverages the ELO rating system, traditionally used in chess, to evaluate fighters' performance based on head-to-head contests. By scraping data from various MMA organizations, we calculate ELO scores that provide a quantifiable measure of a fighter's skill level. This engine aids in ranking fighters and also fuels discussions about their abilities, making the conversation about "the best" more data-driven and insightful. This engine also utilizes fast methods in scraping, storing, and processing data that scale well, providing an effective framework to build off of for ELO ranking systems for other competitive endeavors such as tennis, BJJ, 1v1 esports, fencing, etc.

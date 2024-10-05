@@ -2,7 +2,10 @@ from sqlalchemy.orm import Session
 from models import Fighter, Fight
 from schemas import FighterBase, FightBase
 
-def get_fighter(db: Session, fighter_id: int):
+def get_fighter_by_name(db: Session, fighter_name: str):
+    return db.query(Fighter).filter(Fighter.fighter_name == fighter_name).first()
+
+def get_fighter_by_id(db: Session, fighter_id: int):
     return db.query(Fighter).filter(Fighter.id == fighter_id).first()
 
 def get_fighters(db: Session, skip: int = 0, limit: int = 10):

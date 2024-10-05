@@ -16,8 +16,15 @@ async def root():
 
 # Add additional endpoints here
 @app.get("/fighters/{fighter_id}", response_model=schemas.FighterResponse, status_code=status.HTTP_200_OK)
-def read_fighter(fighter_id: int, db: Session = Depends(get_db)):
-    fighter = crud.get_fighter(db, fighter_id)
+def read_fighter_by_name(fighter_name: str, db: Session = Depends(get_db)):
+    fighter = crud.get_fighter_by_name(db, fighter_name)
+    if fighter is None:
+        raise HTTPException(status_code=404, detail="Fighter not found")
+    return fighter
+
+@app.get("/fighters/{fighter_id}", response_model=schemas.FighterResponse, status_code=status.HTTP_200_OK)
+def read_fighter_by_id(fighter_id: int, db: Session = Depends(get_db)):
+    fighter = crud.get_fighter_by_id(db, fighter_id)
     if fighter is None:
         raise HTTPException(status_code=404, detail="Fighter not found")
     return fighter

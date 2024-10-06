@@ -34,6 +34,7 @@ def update_all_fighters_elo(session):
     for event in events:
         print(f"Processing event {event.id} ({event.event_name})...")
         update_elo_ratings(event.id, session)
+        session.commit()
         print(f"Updated ELO ratings for event {event.id}.")
 
 if __name__ == "__main__":

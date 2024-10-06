@@ -1,5 +1,4 @@
-from sqlalchemy.orm import sessionmaker
-from app.models import Fighter, Fight, Event  # Import models from app.models
+from app.models import Fighter, Fight  # Import models from app.models
 from .elo_calculator import calculate_elo
 
 def update_fighter_elo(fight, session):
@@ -19,8 +18,12 @@ def update_fighter_elo(fight, session):
     fighter_1.elo_rating = new_elo_fighter_1
     fighter_2.elo_rating = new_elo_fighter_2
 
+    return [
+        {"id": fighter_1.id, "elo_score": new_elo_fighter_1},
+        {"id": fighter_2.id, "elo_score": new_elo_fighter_2}
+        ]
     # Commit changes to the session
-    session.commit()
+    #session.commit()
 
 def update_elo_ratings(event_id, session):
     """
@@ -30,9 +33,13 @@ def update_elo_ratings(event_id, session):
     :param session: The database session.
     """
     # Fetch the event and related fights
-    event = session.query(Event).filter(Event.id == event_id).one()
-    fights = session.query(Fight).filter(Fight.event_id == event.id).all()
+    # event = session.query(Event).filter(Event.id == event_id).one()
+    fights = session.query(Fight).filter(Fight.event_id == event_id).all()
+    
+    elo_updates = []
 
     # Process each fight in the event
     for fight in fights:
-        update_fighter_elo(fight, session)
+        elo_updates.extend(update_fighter_elo(fight, session))
+    
+    session.bulk_update_mappings(Fighter, elo_updates)

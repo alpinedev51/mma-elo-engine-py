@@ -1,9 +1,10 @@
 from typing import Union, Tuple
 
-def calculate_elo(fighter_1_elo: Union[float, int], fighter_2_elo: Union[float, int], result: str, k_factor=40) -> Tuple[Union[float, int], Union[float, int]]:
+def calculate_elo(fighter_1_elo: Union[float, int], fighter_2_elo: Union[float, int], result: str, method: str, k_factor=40) -> Tuple[Union[float, int], Union[float, int]]:
     """
     Temporary ELO calculator...
     """
+    k_factor = get_k_factor(method, k_factor, multiplier=1.15)
     expected_score_fighter_1 = expected_score(fighter_1_elo, fighter_2_elo)
     expected_score_fighter_2 = expected_score(fighter_2_elo, fighter_1_elo)
     if result == 'win':
@@ -24,3 +25,9 @@ def calculate_elo(fighter_1_elo: Union[float, int], fighter_2_elo: Union[float, 
 
 def expected_score(current_elo: Union[float, int], opponent_elo: Union[float, int], denom=400) -> Union[float, int]:
     return 1 / (1 + 10**((opponent_elo - current_elo)/denom))
+
+def get_k_factor(method: str, k: Union[float, str], multiplier: Union[float, int]):
+    if method == 'KO/TKO' or method == 'SUB':
+        return k * multiplier  # Increase K by 15% for KO or submission
+    else:
+        return k

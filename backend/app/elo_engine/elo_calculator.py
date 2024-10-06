@@ -1,6 +1,6 @@
 from typing import Union, Tuple
 
-def calculate_elo(fighter_1_elo: Union[float, int], fighter_2_elo: Union[float, int], result: str, method: str, k_factor=40) -> Tuple[Union[float, int], Union[float, int]]:
+def calculate_elo(fighter_1_elo: Union[float, int], fighter_2_elo: Union[float, int], result: str, method: str, k_factor=200) -> Tuple[Union[float, int], Union[float, int]]:
     """
     Temporary ELO calculator...
     """

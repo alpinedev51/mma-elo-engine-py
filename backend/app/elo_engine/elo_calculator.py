@@ -1,12 +1,26 @@
-def calculate_elo(winner_elo, loser_elo, result):
+from typing import Union, Tuple
+
+def calculate_elo(fighter_1_elo: Union[float, int], fighter_2_elo: Union[float, int], result: str, k_factor=40) -> Tuple[Union[float, int], Union[float, int]]:
     """
     Temporary ELO calculator...
     """
+    expected_score_fighter_1 = expected_score(fighter_1_elo, fighter_2_elo)
+    expected_score_fighter_2 = expected_score(fighter_2_elo, fighter_1_elo)
     if result == 'win':
-        return winner_elo + 10, loser_elo - 10
+        S_fighter_1 = 1
+        S_fighter_2 = 0
     elif result == 'loss':
-        return loser_elo + 10, winner_elo - 10
+        S_fighter_1 = 0
+        S_fighter_2 = 1
     elif result == 'draw':
-        return winner_elo, loser_elo  # No change for draw
+        S_fighter_1 = 0.5
+        S_fighter_2 = 0.5
     else:
-        return winner_elo, loser_elo  # No change for no contest
+        return fighter_1_elo, fighter_2_elo  # No change for no contest (nc)
+
+    fighter_1_elo_new = fighter_1_elo + k_factor * (S_fighter_1 - expected_score_fighter_1)
+    fighter_2_elo_new = fighter_2_elo + k_factor * (S_fighter_2 - expected_score_fighter_2)
+    return fighter_1_elo_new, fighter_2_elo_new
+
+def expected_score(current_elo: Union[float, int], opponent_elo: Union[float, int], denom=400) -> Union[float, int]:
+    return 1 / (1 + 10**((opponent_elo - current_elo)/denom))

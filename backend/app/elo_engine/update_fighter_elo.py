@@ -12,7 +12,7 @@ def update_fighter_elo(fight, session):
 
     # Calculate new ELO ratings based on the fight result
     new_elo_fighter_1, new_elo_fighter_2 = calculate_elo(
-        fighter_1.elo_rating, fighter_2.elo_rating, fight.result
+        fighter_1.elo_rating, fighter_2.elo_rating, fight.result, fight.method, k_factor=40
     )
 
     # Update fighter ELOs in the database

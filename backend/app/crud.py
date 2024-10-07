@@ -52,11 +52,6 @@ def get_elo_records_by_fighter(db: Session, fighter_name: str):
         text("SELECT * FROM get_elo_records_by_fighter(:fighter_name_arg)"),
         {"fighter_name_arg": fighter_name}
     )
-    
-    # Fetch all rows and convert them into a list of dictionaries
     records = result.fetchall()
-    
-    # Optionally convert each record into a dictionary
     elo_records = [row._mapping for row in records]
-    
     return elo_records if elo_records else None

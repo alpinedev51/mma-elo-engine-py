@@ -11,13 +11,6 @@ class FighterResponse(FighterBase):
     class Config:
         from_attributes = True
 
-class FightBase(BaseModel):
-    fighter_1_id: int
-    fighter_2_id: int
-    result: str
-    method: str
-    event_id: int
-
 class EventBase(BaseModel):
     event_name: str
     event_date: datetime
@@ -27,6 +20,14 @@ class EventResponse(EventBase):
     
     class Config:
         from_attributes = True
+        
+class FightBase(BaseModel):
+    fighter_1_id: int
+    fighter_2_id: int
+    result: str
+    method: str
+    event_id: int
+
 class FightResponse(FightBase):
     id: int
 

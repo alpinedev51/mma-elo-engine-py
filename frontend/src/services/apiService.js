@@ -1,0 +1,24 @@
+import axios from 'axios';
+
+// Set up base URL for API
+const api = axios.create({
+    baseURL: 'http://127.0.0.1:8000/'
+});
+
+// Get all fighters
+export const getFighters = async () => {
+    const response = await api.get('/fighters');
+    return response.data;
+  };
+  
+  // Get all fights
+  export const getFights = async () => {
+    const response = await api.get('/fights');
+    return response.data;
+  };
+  
+  // Get all events
+  export const getEvents = async () => {
+    const response = await api.get('/events');
+    return response.data;
+  };

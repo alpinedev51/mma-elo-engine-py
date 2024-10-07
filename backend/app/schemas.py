@@ -11,6 +11,17 @@ class FighterResponse(FighterBase):
     class Config:
         from_attributes = True
 
+class EloRecordBase(BaseModel):
+    fighter_id: int
+    elo_rating: float
+    event_id: int
+
+class EloRecordResponse(EloRecordBase):
+    id: int
+    
+    class Config:
+        from_attributes = True
+
 class EventBase(BaseModel):
     event_name: str
     event_date: datetime

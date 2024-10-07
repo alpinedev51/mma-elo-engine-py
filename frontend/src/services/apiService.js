@@ -9,16 +9,16 @@ const api = axios.create({
 export const getFighters = async () => {
     const response = await api.get('/fighters');
     return response.data;
-  };
+};
   
   // Get all fights
-  export const getFights = async () => {
+export const getFights = async () => {
     const response = await api.get('/fights');
     return response.data;
-  };
+};
   
-  // Get all events
-  export const getEvents = async () => {
+// Get all events
+export const getEvents = async () => {
     const response = await api.get('/events');
     return response.data;
-  };
+};

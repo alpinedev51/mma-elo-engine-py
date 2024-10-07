@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from sqlalchemy import text
 from .models import Fighter, Fight, Event
 
 # /fighters/search
@@ -44,3 +45,18 @@ def get_fight_by_id(db: Session, fight_id: int):
 # /fights/
 def get_fights(db: Session, skip: int = 0, limit: int = 10):
     return db.query(Fight).offset(skip).limit(limit).all()
+
+# /elo-records/search
+def get_elo_records_by_fighter(db: Session, fighter_name: str):
+    result = db.execute(
+        text("SELECT * FROM get_elo_records_by_fighter(:fighter_name_arg)"),
+        {"fighter_name_arg": fighter_name}
+    )
+    
+    # Fetch all rows and convert them into a list of dictionaries
+    records = result.fetchall()
+    
+    # Optionally convert each record into a dictionary
+    elo_records = [row._mapping for row in records]
+    
+    return elo_records if elo_records else None

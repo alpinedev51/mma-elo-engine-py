@@ -138,6 +138,7 @@ The data flow in this project can be summarized as follows:
 4. **API Interaction**: The backend exposes API endpoints that allow users to query the database and retrieve information about fighters, fights, and events. Users can perform actions such as:
    - Fetching fighter statistics.
    - Retrieving fight history.
+   - Retrieving Elo history.
    - Accessing event details.
 
 ## References

@@ -50,20 +50,6 @@ To understand Elo intuitively, think of it as a way to gauge a player's skill re
 
 For example, if Fighter A (rated 1600) beats Fighter B (rated 1400), Fighter A’s rating will increase significantly, while Fighter B’s will decrease, reflecting the outcome of the match.
 
-#### Why is Elo Useful?
-
-Elo ratings offer several benefits:
-
-1. **Dynamic and Reflective**: The ratings adjust based on recent performances, making them a current and relevant measure of skill.
-
-2. **Comparative Ranking**: Elo allows for easy comparison between fighters or players, making it easier for fans and organizations to assess matchups.
-
-3. **Encourages Competition**: The system encourages players to compete against others with similar ratings, promoting fairer and more exciting matches.
-
-4. **Widely Recognized**: The Elo system is well-known and respected across various sports, making it a trusted measure for fans, analysts, and fighters alike.
-
-By incorporating Elo ratings into your MMA database, you provide users with a powerful tool to evaluate fighters' performances and skill levels, enhancing the overall experience of interacting with your data.
-
 ## Data Flow Diagram
 
 ```mermaid

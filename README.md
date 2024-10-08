@@ -1,4 +1,4 @@
-# MMA ELO Engine
+# MMA Elo Engine
 
 #### Updates
 [10/03/2024]
@@ -6,25 +6,25 @@
 - Currently working on implementing the backend in Rust.
 - Scraping is working (Scrapy).
 - Data is updated and stored in PostgreSQL database (locally).
-- ELO scores are all at 1000.
-- ELO engine for using tables to update fighter ELO is a WIP.
+- Elo scores are all at 1000.
+- Elo engine for using tables to update fighter Elo is a WIP.
 
 ## Introduction
-The MMA ELO Engine is a tool designed to help answer the age-old question: "Who is the best fighter?" In the world of mixed martial arts (MMA), rankings can often be subjective and hotly debated. This project leverages the ELO rating system, traditionally used in chess, to evaluate fighters' performance based on head-to-head contests. By scraping data from various MMA organizations, we calculate ELO scores that provide a quantifiable measure of a fighter's skill level. This engine aids in ranking fighters and also fuels discussions about their abilities, making the conversation about "the best" more data-driven and insightful. This engine also utilizes fast methods in scraping, storing, and processing data that scale well, providing an effective framework to build off of for ELO ranking systems for other competitive endeavors such as tennis, BJJ, 1v1 esports, fencing, etc.
+The MMA Elo Engine is a tool designed to help answer the age-old question: "Who is the best fighter?" In the world of mixed martial arts (MMA), rankings can often be subjective and hotly debated. This project leverages the Elo rating system, traditionally used in chess, to evaluate fighters' performance based on head-to-head contests. By scraping data from various MMA organizations, we calculate Elo scores that provide a quantifiable measure of a fighter's skill level. This engine aids in ranking fighters and also fuels discussions about their abilities, making the conversation about "the best" more data-driven and insightful. This engine also utilizes fast methods in scraping, storing, and processing data that scale well, providing an effective framework to build off of for Elo ranking systems for other competitive endeavors such as tennis, BJJ, 1v1 esports, fencing, etc.
 
-## Understanding ELO Ratings
+## Understanding Elo Ratings
 
-#### What is ELO?
+#### What is Elo?
 
-ELO is a rating system used to calculate the relative skill levels of players in two-player games such as chess, and in some cases, in combat sports like MMA. It provides a way to rank competitors based on their performance against one another.
+Elo is a rating system used to calculate the relative skill levels of players in two-player games such as chess, and in some cases, in combat sports like MMA. It provides a way to rank competitors based on their performance against one another.
 
-#### Origins of ELO
+#### Origins of Elo
 
-The ELO rating system was developed by Arpad Elo, a Hungarian-American physics professor, in the 1960s. Initially designed for chess, it aimed to provide a more accurate reflection of player skill compared to the previously used systems. The ELO system quickly gained popularity and has since been adapted for various sports and games, including boxing and mixed martial arts (MMA).
+The Elo rating system was devEloped by Arpad Elo, a Hungarian-American physics professor, in the 1960s. Initially designed for chess, it aimed to provide a more accurate reflection of player skill compared to the previously used systems. The Elo system quickly gained popularity and has since been adapted for various sports and games, including boxing and mixed martial arts (MMA).
 
 #### Mathematical Definition
 
-The ELO rating system calculates a player’s new rating based on the following formula:
+The Elo rating system calculates a player’s new rating based on the following formula:
 
 $$
 R_{new} = R_{current} + k (S - E_{S})
@@ -34,7 +34,7 @@ Where:
 
 - $R_{new} :=$ New rating
 - $R_{current} :=$ Current rating
-- $k :=$ Development coefficient (a constant that determines how much a player's rating can change after each match)
+- $k :=$ DevElopment coefficient (a constant that determines how much a player's rating can change after each match)
 - $S :=$ Actual score (1 for a win, 0 for a loss, and 0.5 for a draw)
 - $E_{S} :=$ Expected score, calculated using the following formula:
 
@@ -46,23 +46,23 @@ $$
 
 #### Intuitive Understanding
 
-To understand ELO intuitively, think of it as a way to gauge a player's skill relative to their opponents. When a player wins against a higher-rated opponent, their rating increases significantly because it indicates a strong performance. Conversely, if a lower-rated player loses to a higher-rated one, their rating decreases less dramatically. This dynamic system allows for quick adjustments based on recent performances, providing a more accurate representation of skill over time.
+To understand Elo intuitively, think of it as a way to gauge a player's skill relative to their opponents. When a player wins against a higher-rated opponent, their rating increases significantly because it indicates a strong performance. Conversely, if a lower-rated player loses to a higher-rated one, their rating decreases less dramatically. This dynamic system allows for quick adjustments based on recent performances, providing a more accurate representation of skill over time.
 
 For example, if Fighter A (rated 1600) beats Fighter B (rated 1400), Fighter A’s rating will increase significantly, while Fighter B’s will decrease, reflecting the outcome of the match.
 
-#### Why is ELO Useful?
+#### Why is Elo Useful?
 
-ELO ratings offer several benefits:
+Elo ratings offer several benefits:
 
 1. **Dynamic and Reflective**: The ratings adjust based on recent performances, making them a current and relevant measure of skill.
 
-2. **Comparative Ranking**: ELO allows for easy comparison between fighters or players, making it easier for fans and organizations to assess matchups.
+2. **Comparative Ranking**: Elo allows for easy comparison between fighters or players, making it easier for fans and organizations to assess matchups.
 
 3. **Encourages Competition**: The system encourages players to compete against others with similar ratings, promoting fairer and more exciting matches.
 
-4. **Widely Recognized**: The ELO system is well-known and respected across various sports, making it a trusted measure for fans, analysts, and fighters alike.
+4. **Widely Recognized**: The Elo system is well-known and respected across various sports, making it a trusted measure for fans, analysts, and fighters alike.
 
-By incorporating ELO ratings into your MMA database, you provide users with a powerful tool to evaluate fighters' performances and skill levels, enhancing the overall experience of interacting with your data.
+By incorporating Elo ratings into your MMA database, you provide users with a powerful tool to evaluate fighters' performances and skill levels, enhancing the overall experience of interacting with your data.
 
 ## Data Flow Diagram
 
@@ -78,7 +78,7 @@ flowchart TD
     end
 
     subgraph Processing
-        B1 --> C1[Weekly ELO Calculation]
+        B1 --> C1[Weekly Elo Calculation]
         C1 --> B1
     end
 
@@ -92,8 +92,8 @@ flowchart TD
 
     click A1 "Scrapy Spiders regularly crawl MMA websites for fighter data."
     click A2 "Pipelines process and store the fighter data into the database."
-    click B1 "PostgreSQL database houses fighter data and ELO scores."
-    click C1 "A weekly job calculates and updates ELO ratings."
+    click B1 "PostgreSQL database houses fighter data and Elo scores."
+    click C1 "A weekly job calculates and updates Elo ratings."
     click D1 "APIs provide access to stored data."
     click E1 "Data is displayed on a React-based frontend."
 
@@ -114,27 +114,27 @@ flowchart TD
 ## Technical Overview
 
 ### Design Philosophy
-The MMA ELO Engine was designed with the following principles in mind:
+The MMA Elo Engine was designed with the following principles in mind:
 - **Data-Driven Insights**: By utilizing a proven statistical framework, our project aims to provide an objective ranking system that transcends subjective opinions.
-- **Modularity and Scalability**: The architecture allows for easy addition of new data sources and methods for calculating ELO scores, ensuring that the engine can adapt to changes in the MMA landscape.
+- **Modularity and Scalability**: The architecture allows for easy addition of new data sources and methods for calculating Elo scores, ensuring that the engine can adapt to changes in the MMA landscape.
 
 ### Technology Stack
-- **Database**: PostgreSQL is used to store fighter data, fight results, and calculated ELO scores, ensuring data integrity and efficient querying.
+- **Database**: PostgreSQL is used to store fighter data, fight results, and calculated Elo scores, ensuring data integrity and efficient querying.
 - **Web Scraping**: We utilize Python libraries like Beautiful Soup and Scrapy to gather statistics from multiple MMA organizations, enabling comprehensive data collection.
-- **API Development**: FastAPI is employed to create a robust and high-performance API, allowing users to access fighter statistics and ELO scores programmatically.
-- **Data Processing**: Custom algorithms are implemented to calculate ELO scores based on fight outcomes, adjusting ratings according to the opponents' ranks.
+- **API DevElopment**: FastAPI is employed to create a robust and high-performance API, allowing users to access fighter statistics and Elo scores programmatically.
+- **Data Processing**: Custom algorithms are implemented to calculate Elo scores based on fight outcomes, adjusting ratings according to the opponents' ranks.
 
 ### Architecture
 The project is structured in a modular fashion:
 1. **Data Collection**: A web scraper fetches and stores fighter statistics and fight results in the database.
-2. **ELO Calculation**: An ELO calculation module processes fight results and updates fighter ratings accordingly.
-3. **API Layer**: The FastAPI application serves as an interface for users to query fighters and their ELO scores, facilitating easy access to data.
+2. **Elo Calculation**: An Elo calculation module processes fight results and updates fighter ratings accordingly.
+3. **API Layer**: The FastAPI application serves as an interface for users to query fighters and their Elo scores, facilitating easy access to data.
 
 ### Unique Features
-What sets the MMA ELO Engine apart from existing UFC/MMA ELO projects:
+What sets the MMA Elo Engine apart from existing UFC/MMA Elo projects:
 - **Dynamic Data Sources**: Our system integrates data from various MMA promotions, providing a more comprehensive view of a fighter's performance.
 - **Real-Time Updates**: As fights occur, the engine automatically updates fighter ratings, ensuring that users always have access to the most current data.
-- **User-Friendly API**: The FastAPI interface allows developers and enthusiasts to easily access and integrate the ELO data into their applications or analyses.
+- **User-Friendly API**: The FastAPI interface allows devElopers and enthusiasts to easily access and integrate the Elo data into their applications or analyses.
 
 ## Data Flow
 
@@ -144,7 +144,7 @@ The data flow in this project can be summarized as follows:
 
 2. **Processing**: After the data is scraped, it is processed and cleaned to ensure it adheres to the required schema.
 
-3. **Storing**: The processed data is then stored in a PostgreSQL database named `mma_elo_db`, which consists of the following tables:
+3. **Storing**: The processed data is then stored in a PostgreSQL database named `mma_Elo_db`, which consists of the following tables:
    - **Fighters**: Contains information about each fighter.
    - **Fights**: Records details about each fight, including the fighters involved and the result.
    - **Events**: Details about the events where the fights take place.

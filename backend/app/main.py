@@ -4,11 +4,22 @@ from . import schemas
 from sqlalchemy.orm import Session
 from typing import List
 from .database import init_db, get_db
+from fastapi.middleware.cors import CORSMiddleware
 
 # Create the database
 # init_db()
 
 app = FastAPI()
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins. You can restrict it to specific origins.
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods (GET, POST, etc.)
+    allow_headers=["*"],  # Allows all headers
+)
+
 
 @app.get("/")
 async def root():

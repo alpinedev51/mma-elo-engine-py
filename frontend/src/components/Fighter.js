@@ -11,6 +11,7 @@ const Fighter = () => {
         setFighter([]);
         try {
             const records = await getFighter(fighterName);
+            console.log(records)
             setFighter(records);
         } catch (err) {
             setError('No Elo records returned for this fighter.');

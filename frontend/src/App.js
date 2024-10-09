@@ -1,5 +1,5 @@
 import React from 'react';
-import Fighter from './components/Fighter'; // Adjust the import based on your file structure
+import Fighter from './components/Fighter';
 
 const App = () => {
     return (

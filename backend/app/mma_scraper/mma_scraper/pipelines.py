@@ -13,7 +13,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '.
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from itemadapter import ItemAdapter
-from models import Fighter, Fight, Event
+from models import Fighter, Fight, Event, EloRecord
 
 
 class MmaScraperPipeline:
@@ -57,12 +57,18 @@ class MmaScraperPipeline:
             fighter_1 = Fighter(fighter_name=fighter_1_name, elo_rating=1000)
             self.session.add(fighter_1)
             self.session.commit()
+            
+            initial_elo_1 = EloRecord(fighter_id=fighter_1.id, elo_rating=fighter_1.elo_rating, event_id=event.id)
+            self.session.add(initial_elo_1)
 
         fighter_2 = self.session.query(Fighter).filter_by(fighter_name=fighter_2_name).first()
         if not fighter_2:
             fighter_2 = Fighter(fighter_name=fighter_2_name, elo_rating=1000)
             self.session.add(fighter_2)
             self.session.commit()
+            
+            initial_elo_1 = EloRecord(fighter_id=fighter_2.id, elo_rating=fighter_2.elo_rating, event_id=event.id)
+            self.session.add(initial_elo_1)
 
         # handle fights
         fight = Fight(

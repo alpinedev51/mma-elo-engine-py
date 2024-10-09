@@ -4,11 +4,22 @@ from . import schemas
 from sqlalchemy.orm import Session
 from typing import List
 from .database import init_db, get_db
+from fastapi.middleware.cors import CORSMiddleware
 
 # Create the database
-#init_db()
+# init_db()
 
 app = FastAPI()
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["GET"],
+    allow_headers=["*"],  # Allows all headers
+)
+
 
 @app.get("/")
 async def root():
@@ -76,3 +87,10 @@ def read_fights(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
     if not fights:
         raise HTTPException(status_code=404, detail="No fights returned...")
     return fights
+
+@app.get("/elo-records/search", response_model=List[schemas.EloRecordByFighterResponse], status_code=status.HTTP_200_OK)
+def read_elo_records_by_fighter(fighter_name: str, db: Session = Depends(get_db)):
+    elo_records = crud.get_elo_records_by_fighter(db, fighter_name)
+    if not elo_records:
+        raise HTTPException(status_code=404, detail="No Elo records returned...")
+    return elo_records

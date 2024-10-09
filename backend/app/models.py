@@ -14,8 +14,20 @@ class Fighter(Base):
     fights_as_fighter_1 = relationship("Fight", back_populates="fighter_1_relationship", foreign_keys="Fight.fighter_1_id")
     fights_as_fighter_2 = relationship("Fight", back_populates="fighter_2_relationship", foreign_keys="Fight.fighter_2_id")
     
+    elo_record_relationship = relationship("EloRecord", back_populates="fighter_relationship")
+    
     def __repr__(self):
         return f"<Fighter(name={self.fighter_name}, elo_rating={self.elo_rating})>"
+    
+class EloRecord(Base):
+    __tablename__ = "elo_records"
+
+    id = Column(Integer, primary_key=True, index=True)
+    fighter_id = Column(Integer, ForeignKey("fighters.id"))
+    elo_rating = Column(Float, nullable=False)
+    event_id = Column(Integer, ForeignKey("events.id"))
+
+    fighter_relationship = relationship("Fighter", back_populates="elo_record_relationship")
 
 class Event(Base):
     __tablename__ = "events"

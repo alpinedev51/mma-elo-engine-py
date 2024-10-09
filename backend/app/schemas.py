@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, condecimal
 from datetime import datetime
 
 class FighterBase(BaseModel):
@@ -8,6 +8,17 @@ class FighterBase(BaseModel):
 class FighterResponse(FighterBase):
     id: int
 
+    class Config:
+        from_attributes = True
+
+class EloRecordBase(BaseModel):
+    fighter_id: int
+    elo_rating: float
+    event_id: int
+
+class EloRecordResponse(EloRecordBase):
+    id: int
+    
     class Config:
         from_attributes = True
 
@@ -30,6 +41,15 @@ class FightBase(BaseModel):
 
 class FightResponse(FightBase):
     id: int
+
+    class Config:
+        from_attributes = True
+
+
+class EloRecordByFighterResponse(BaseModel):
+    fighter_id: int
+    fighter_name: str
+    elo_rating: float
 
     class Config:
         from_attributes = True

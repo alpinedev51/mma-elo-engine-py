@@ -1,5 +1,6 @@
 # Ignore environment config
 .env
+.pyc
 
 **/__pycache__
 

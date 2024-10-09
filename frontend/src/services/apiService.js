@@ -10,6 +10,19 @@ export const getFighters = async () => {
     const response = await api.get('/fighters');
     return response.data;
 };
+
+// Function to fetch Elo records by fighter name
+export const getFighter = async (fighterName) => {
+    try {
+        const response = await api.get('/fighters/search', {
+            params: { fighter_name: fighterName }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching Elo records:', error);
+        throw error;
+    }
+};
   
   // Get all fights
 export const getFights = async () => {
@@ -21,4 +34,17 @@ export const getFights = async () => {
 export const getEvents = async () => {
     const response = await api.get('/events');
     return response.data;
+};
+
+// Function to fetch Elo records by fighter name
+export const getEloRecordsByFighter = async (fighterName) => {
+    try {
+        const response = await api.get('/elo-records/search', {
+            params: { fighter_name: fighterName }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching Elo records:', error);
+        throw error;
+    }
 };

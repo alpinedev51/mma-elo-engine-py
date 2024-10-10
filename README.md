@@ -61,8 +61,9 @@ flowchart TD
     end
 
     subgraph Processing
-        B1 --> C1[Weekly Elo Calculation]
+        B1 --> C1[Initial Elo Calculation + Weekly Updates]
         C1 --> B1
+        A1 --> B1
     end
 
     subgraph API

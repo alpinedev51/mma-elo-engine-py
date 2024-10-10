@@ -123,14 +123,15 @@ What sets the MMA Elo Engine apart from existing UFC/MMA Elo projects:
 
 The data flow in this project can be summarized as follows:
 
-1. **Scraping**: The backend utilizes Scrapy to scrape data from various MMA-related websites. The data collected includes information about fighters, fights, and events.
+1. **Scraping**: The backend utilizes Scrapy to scrape data from various MMA-related websites. The data collected includes information about fighters, fights, events, and initializes Elo ratings for each fighter to 1000.
 
-2. **Processing**: After the data is scraped, it is processed and cleaned to ensure it adheres to the required schema.
+2. **Processing**: After the data is scraped, it is processed and cleaned to ensure it adheres to the required schema through the Item Pipeline in Scrapy.
 
-3. **Storing**: The processed data is then stored in a PostgreSQL database named `mma_Elo_db`, which consists of the following tables:
-   - **Fighters**: Contains information about each fighter.
-   - **Fights**: Records details about each fight, including the fighters involved and the result.
-   - **Events**: Details about the events where the fights take place.
+3. **Storing**: The processed data is then stored in a PostgreSQL database named `mma_elo_db`, which consists of the following tables:
+   - **`fighters`**: Contains information about each fighter.
+   - **`fights`**: Records details about each fight, including the fighters involved and the result.
+   - **`events`**: Details about the events where the fights take place.
+   - **`elo_records`**: Elo history for each fighter.
 
 4. **API Interaction**: The backend exposes API endpoints that allow users to query the database and retrieve information about fighters, fights, and events. Users can perform actions such as:
    - Fetching fighter statistics.

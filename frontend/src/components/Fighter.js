@@ -27,7 +27,9 @@ const Fighter = () => {
                 onChange={(e) => setFighterName(e.target.value)}
                 placeholder="Enter fighter name"
             />
-            <button onClick={handleSearch}>Search</button>
+            <button className="search-button" onClick={handleSearch}>
+                Search
+            </button>
 
             {error && <p style={{ color: 'red' }}>{error}</p>}
             {eloRecords.length > 0 && (

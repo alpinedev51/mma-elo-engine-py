@@ -1,56 +1,26 @@
-.App {
+.App-content {
   text-align: center;
+  background-color: #003057;
+  font-family: Arial;
 }
 
-
-.App-body {
-  margin: 0;
-  font-family: 'Arial', sans-serif;
-  background-color: #282c34;
+.App-content-title {
   color: #ffffff;
+  font-family: monospace;
+  font-size: 32;
+  min-height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
+.App-stats-box {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  align-items: first baseline;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
-
-.Fighter, .EloRecordsByFighter {
-  flex: 1; /* Components take equal space */
-  padding: 20px;
-  background-color: #1e1e1e; /* Slightly lighter background for component containers */
-  border-radius: 10px;
-  margin: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-.EloRecordsByFighter {
-  margin-left: 20px;
-}
-
-.App-input, .App-button {
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: #333333;
-  color: #ffffff;
-}
-
-.App-input {
-  margin-right: 10px;
-}
-
-.App-button:hover {
-  background-color: #444444;
 }

@@ -18,10 +18,6 @@ The MMA Elo Engine is a tool designed to help answer the age-old question: "Who 
 
 Elo is a rating system used to calculate the relative skill levels of players in two-player games such as chess, and in some cases, in combat sports like MMA. It provides a way to rank competitors based on their performance against one another.
 
-#### Origins of Elo
-
-The Elo rating system was devEloped by Arpad Elo, a Hungarian-American physics professor, in the 1960s. Initially designed for chess, it aimed to provide a more accurate reflection of player skill compared to the previously used systems. The Elo system quickly gained popularity and has since been adapted for various sports and games, including boxing and mixed martial arts (MMA).
-
 #### Mathematical Definition
 
 The Elo rating system calculates a player’s new rating based on the following formula:
@@ -46,9 +42,9 @@ $$
 
 #### Intuitive Understanding
 
-To understand Elo intuitively, think of it as a way to gauge a player's skill relative to their opponents. When a player wins against a higher-rated opponent, their rating increases significantly because it indicates a strong performance. Conversely, if a lower-rated player loses to a higher-rated one, their rating decreases less dramatically. This dynamic system allows for quick adjustments based on recent performances, providing a more accurate representation of skill over time.
+To understand Elo intuitively, think of it as a way to gauge a player's skill relative to their opponents. When a player wins against a higher-rated opponent, their rating increases significantly because it indicates a strong performance. Conversely, if a lower-rated player loses to a higher-rated one, their rating decreases less dramatically.
 
-For example, if Fighter A (rated 1600) beats Fighter B (rated 1400), Fighter A’s rating will increase significantly, while Fighter B’s will decrease, reflecting the outcome of the match.
+For example, if Fighter A (rated 1400) beats Fighter B (rated 1600), Fighter A’s rating will increase significantly, while Fighter B’s will decrease significantly. However if Fighter B were to beat Fighter A, then their ELOs would change, but less dramatically since this is result is closer to the estimated expected outcome.
 
 ## Data Flow Diagram
 

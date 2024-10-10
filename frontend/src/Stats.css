@@ -31,4 +31,20 @@
     background-color: #232323;
     color: #ffffff;
 }
+
+.elo-records ul {
+    list-style-type: disc;
+    padding-left: 0px;
+}
+
+.elo-records li {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #cccccc;
+}
+
+.elo-records li::marker {
+    font-size: 10px;
+    color: #ffffff;
+}
   

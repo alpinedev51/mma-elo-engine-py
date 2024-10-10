@@ -14,13 +14,13 @@ const Fighter = () => {
             console.log(records)
             setFighter(records);
         } catch (err) {
-            setError('No Elo records returned for this fighter.');
+            setError('No fighters returned.');
         }
     };
 
     return (
         <div>
-            <h2>Search Elo Records by Fighter</h2>
+            <h2>Search Fighter</h2>
             <input
                 type="text"
                 value={fighterName}
@@ -34,7 +34,7 @@ const Fighter = () => {
                 <ul>
                     {eloRecords.map((record) => (
                         <li key={record.fighter_id}>
-                            <strong>{record.fighter_name}</strong>: Elo Rating - {record.elo_rating}
+                            <strong>{record.fighter_name}</strong>: Elo Rating - {parseFloat(record.elo_rating).toFixed(1)}
                         </li>
                     ))}
                 </ul>

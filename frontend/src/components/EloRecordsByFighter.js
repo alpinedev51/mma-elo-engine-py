@@ -11,6 +11,7 @@ const EloRecordsByFighter = () => {
         setEloRecordsByFighter([]);
         try {
             const records = await getEloRecordsByFighter(fighterName);
+            console.log(records)
             setEloRecordsByFighter(records);
         } catch (err) {
             setError('No Elo records returned for this fighter.');
@@ -33,7 +34,7 @@ const EloRecordsByFighter = () => {
                 <ul>
                     {eloRecords.map((record) => (
                         <li key={record.fighter_id}>
-                            <strong>{record.fighter_name}</strong>: Elo Rating - {record.elo_rating}
+                            <strong>{record.fighter_name}</strong>: Elo Rating - {parseFloat(record.elo_rating).toFixed(1)}
                         </li>
                     ))}
                 </ul>

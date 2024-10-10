@@ -96,16 +96,10 @@ flowchart TD
 
 ## Technical Overview
 
-### Design Philosophy
-The MMA Elo Engine was designed with the following principles in mind:
-- **Data-Driven Insights**: By utilizing a proven statistical framework, our project aims to provide an objective ranking system that transcends subjective opinions.
-- **Modularity and Scalability**: The architecture allows for easy addition of new data sources and methods for calculating Elo scores, ensuring that the engine can adapt to changes in the MMA landscape.
-
 ### Technology Stack
-- **Database**: PostgreSQL is used to store fighter data, fight results, and calculated Elo scores, ensuring data integrity and efficient querying.
-- **Web Scraping**: We utilize Python libraries like Beautiful Soup and Scrapy to gather statistics from multiple MMA organizations, enabling comprehensive data collection.
-- **API DevElopment**: FastAPI is employed to create a robust and high-performance API, allowing users to access fighter statistics and Elo scores programmatically.
-- **Data Processing**: Custom algorithms are implemented to calculate Elo scores based on fight outcomes, adjusting ratings according to the opponents' ranks.
+- **Database**: PostgreSQL is used to store fighter data, fight results, and calculated Elo scores.
+- **Web Scraping**: We utilize the fast Python scraping framework Scrapy to gather statistics.
+- **API Development**: FastAPI is employed to create a high-performance API.
 
 ### Architecture
 The project is structured in a modular fashion:
@@ -113,11 +107,9 @@ The project is structured in a modular fashion:
 2. **Elo Calculation**: An Elo calculation module processes fight results and updates fighter ratings accordingly.
 3. **API Layer**: The FastAPI application serves as an interface for users to query fighters and their Elo scores, facilitating easy access to data.
 
-### Unique Features
-What sets the MMA Elo Engine apart from existing UFC/MMA Elo projects:
-- **Dynamic Data Sources**: Our system integrates data from various MMA promotions, providing a more comprehensive view of a fighter's performance.
-- **Real-Time Updates**: As fights occur, the engine automatically updates fighter ratings, ensuring that users always have access to the most current data.
-- **User-Friendly API**: The FastAPI interface allows devElopers and enthusiasts to easily access and integrate the Elo data into their applications or analyses.
+### Goals / Future Features
+- **Dynamic Data Sources**: Integrate data from various MMA promotions, providing a more comprehensive view of a fighter's performance.
+- **Real-Time Updates**: As fights occur, automatically update fighter ratings, ensuring that users always have access to the most current data.
 
 ## Data Flow
 
@@ -133,7 +125,7 @@ The data flow in this project can be summarized as follows:
    - **`events`**: Details about the events where the fights take place.
    - **`elo_records`**: Elo history for each fighter.
 
-4. **API Interaction**: The backend exposes API endpoints that allow users to query the database and retrieve information about fighters, fights, and events. Users can perform actions such as:
+4. **API Interaction**: The backend exposes API endpoints that allow users to query the database and retrieve information about fighters, fights, events, and elo ratings. Users can perform actions such as:
    - Fetching fighter statistics.
    - Retrieving fight history.
    - Retrieving Elo history.

@@ -1,0 +1,9 @@
+FROM postgres:17
+
+# Set environment variables for PostgreSQL
+ENV DATABASE_NAME=${DATABASE_NAME}
+ENV DATABASE_USER=${DATABASE_USER}
+ENV DATABASE_PW=${DATABASE_PW}
+
+# Expose PostgreSQL port
+EXPOSE 5432

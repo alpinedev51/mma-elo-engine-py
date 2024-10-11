@@ -18,7 +18,7 @@ conn = psycopg2.connect(
     user=DB_USER,
     password=DB_PW,
     host=DB_HOST,
-    port= DB_PORT
+    port=DB_PORT
 )
  
 conn.autocommit = True

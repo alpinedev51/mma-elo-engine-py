@@ -7,24 +7,12 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
-    environment: DB_ENV
-
-    services:
-      postgres:
-        image: postgres:17
-        env:
-          DATABASE_USER: ${{ secrets.DATABASE_USER }}
-          DATABASE_PW: ${{ secrets.DATABASE_PW }}
-          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-        ports:
-          - 5432:5432
 
     steps:
     - uses: actions/checkout@v4
+
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
 
@@ -34,12 +22,23 @@ jobs:
         echo "DATABASE_USER=${{ secrets.DATABASE_USER }}" >> $GITHUB_ENV
         echo "DATABASE_PW=${{ secrets.DATABASE_PW }}" >> $GITHUB_ENV
         echo "DATABASE_PORT=${{ secrets.DATABASE_PORT }}" >> $GITHUB_ENV
-        
+
     - name: Build the Docker image
       run: docker build . --file backend/Dockerfile --tag my-image-name:$(date +%s)
 
     - name: Run Backend
-      run: docker-compose up --build -d
+      run: |
+        # Start the container in detached mode
+        docker run -d \
+          --env DATABASE_NAME=${{ secrets.DATABASE_NAME }} \
+          --env DATABASE_USER=${{ secrets.DATABASE_USER }} \
+          --env DATABASE_PW=${{ secrets.DATABASE_PW }} \
+          -p 5050:5050 \
+          my-image-name:$(date +%s)
 
     - name: Run Health Check
-      run: curl http://localhost:5050/health
+      run: |
+        # Wait for the backend service to be ready
+        sleep 10 # Adjust the time if needed
+        curl http://localhost:5050/health
+        

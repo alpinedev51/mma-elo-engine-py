@@ -1,0 +1,45 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    environment: DB_ENV
+
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          DATABASE_USER: ${{ secrets.DATABASE_USER }}
+          DATABASE_PW: ${{ secrets.DATABASE_PW }}
+          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+        ports:
+          - 5432:5432
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Load environment variables
+      run: |
+        echo "DATABASE_NAME=${{ secrets.DATABASE_NAME }}" >> $GITHUB_ENV
+        echo "DATABASE_USER=${{ secrets.DATABASE_USER }}" >> $GITHUB_ENV
+        echo "DATABASE_PW=${{ secrets.DATABASE_PW }}" >> $GITHUB_ENV
+        echo "DATABASE_PORT=${{ secrets.DATABASE_PORT }}" >> $GITHUB_ENV
+        
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+
+    - name: Run Backend
+      run: docker-compose up --build -d
+
+    - name: Run Health Check
+      run: curl http://localhost:5050/health

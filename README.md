@@ -57,7 +57,8 @@ flowchart TD
     end
 
     subgraph Scraping_Project
-        A1[Scrapy Spiders] --> A2[Item Pipelines]
+        A1[Scrapy Spiders] --> W1
+        W1 --> A2[Item Pipelines]
         click A1 "Scrapy Spiders regularly crawl MMA websites for fighter data."
         click A2 "Pipelines process and store the fighter data into the database."
     end

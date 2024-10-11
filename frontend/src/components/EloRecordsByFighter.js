@@ -19,7 +19,7 @@ const EloRecordsByFighter = () => {
     };
 
     return (
-        <div>
+        <div className="elo-records">
             <h2>Search Elo Records by Fighter</h2>
             <input
                 type="text"
@@ -27,7 +27,9 @@ const EloRecordsByFighter = () => {
                 onChange={(e) => setFighterName(e.target.value)}
                 placeholder="Enter fighter name"
             />
-            <button onClick={handleSearch}>Search</button>
+            <button className="search-button" onClick={handleSearch}>
+                Search
+            </button>
 
             {error && <p style={{ color: 'red' }}>{error}</p>}
             {eloRecords.length > 0 && (

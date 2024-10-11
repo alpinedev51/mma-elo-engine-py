@@ -3,17 +3,10 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 
-
-# useful for handling different item types with a single interface
-import sys
-import os
-# Add the app directory to sys.path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '../', 'app')))
-
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from itemadapter import ItemAdapter
-from models import Fighter, Fight, Event, EloRecord
+from mma_scraper.models import Fighter, Fight, Event, EloRecord
 
 
 class MmaScraperPipeline:

@@ -1,6 +1,5 @@
-# Ignore environment config
-.env
-
+/.env
+/scrapy.log
 # Ignore Python cache directories
 __pycache__/
 
@@ -8,7 +7,3 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
-
-**/create_database.py
-
-app/mma_scraper/scrapy.log

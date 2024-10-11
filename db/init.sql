@@ -1,1 +1,0 @@
-CREATE IF NOT EXISTS DATABASE mma_elo_db;

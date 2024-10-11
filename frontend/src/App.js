@@ -2,12 +2,13 @@ import React from 'react';
 import Fighter from './components/Fighter';
 import EloRecordsByFighter from './components/EloRecordsByFighter';
 import './App.css'
+import './Stats.css'
 
 const App = () => {
     return (
-        <div classname = "App">
-            <h1>MMA Elo Ratings</h1>
-            <div className="App-header">
+        <div className = "App-content">
+            <h1 className = "App-content-title">MMA Elo Ratings</h1>
+            <div className="App-stats-box">
                 <div className="Fighter">
                     <Fighter />
                 </div>

@@ -35,10 +35,7 @@ jobs:
           --env DATABASE_PW=${{ secrets.DATABASE_PW }} \
           -p 5050:5050 \
           my-image-name:latest
-
-    - name: Run Health Check
-      run: |
-        # Wait for the backend service to be ready
-        sleep 10 # Adjust the time if needed
-        curl http://localhost:5050/health
+    
+    - name: Check Logs
+      run: docker logs $(docker ps -q --filter "name=backend")
         

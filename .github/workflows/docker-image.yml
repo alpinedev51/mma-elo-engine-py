@@ -34,7 +34,7 @@ jobs:
           --env DATABASE_USER=${{ secrets.DATABASE_USER }} \
           --env DATABASE_PW=${{ secrets.DATABASE_PW }} \
           -p 5050:5050 \
-          my-image-name:$(date +%s)
+          my-image-name:latest
 
     - name: Run Health Check
       run: |

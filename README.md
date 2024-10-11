@@ -94,6 +94,8 @@ flowchart TD
 ```
 
 ```mermaid
+flowchart TD
+
     subgraph Scraping_Project
         A1[Scrapy Spiders] --> A2[Item Pipelines]
         click A1 "Scrapy Spiders regularly crawl MMA websites for fighter data."

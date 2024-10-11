@@ -52,6 +52,14 @@ For example, if Fighter A (rated 1400) beats Fighter B (rated 1600), Fighter Aâ€
 ```mermaid
 flowchart TD
 
+    subgraph Websites
+        W1[Website 1]
+        W2[Website 2]
+        W3[Website 3]
+        W4[Website 4]
+        W5[Website 5]
+    end
+
     subgraph Scraping_Project
         A1[Scrapy Spiders] --> A2[Item Pipelines]
         click A1 "Scrapy Spiders regularly crawl MMA websites for fighter data."

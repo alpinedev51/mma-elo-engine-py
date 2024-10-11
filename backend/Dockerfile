@@ -9,7 +9,7 @@ RUN apt-get update && \
 
 WORKDIR /app
 
-COPY requirements.txt .
+COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r backend/requirements.txt
 
 COPY . .

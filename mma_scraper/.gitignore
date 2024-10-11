@@ -1,3 +1,9 @@
-.env
+/.env
+/scrapy.log
+# Ignore Python cache directories
+__pycache__/
 
-scrapy.log
+# Ignore other files and directories
+*.pyc
+*.pyo
+*.pyd

@@ -6,7 +6,7 @@
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from itemadapter import ItemAdapter
-from backend.app.models import Fighter, Fight, Event, EloRecord
+from mma_scraper.models import Fighter, Fight, Event, EloRecord
 
 
 class MmaScraperPipeline:

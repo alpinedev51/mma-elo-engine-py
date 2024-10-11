@@ -52,50 +52,6 @@ For example, if Fighter A (rated 1400) beats Fighter B (rated 1600), Fighter Aâ€
 ```mermaid
 flowchart TD
 
-    subgraph Scraping
-        A1[Scrapy Spiders] --> A2[Item Pipelines]
-    end
-
-    subgraph Database
-        A2 --> B1[(PostgreSQL Database)]
-    end
-
-    subgraph Processing
-        B1 --> C1[Initial Elo Calculation + Weekly Updates]
-        C1 --> B1
-    end
-
-    subgraph API
-        B1 --> D1[API Endpoints]
-    end
-
-    subgraph Frontend
-        D1 --> E1[React Website]
-    end
-
-    click A1 "Scrapy Spiders regularly crawl MMA websites for fighter data."
-    click A2 "Pipelines process and store the fighter data into the database."
-    click B1 "PostgreSQL database houses fighter data and Elo scores."
-    click C1 "A weekly job calculates and updates Elo ratings."
-    click D1 "APIs provide access to stored data."
-    click E1 "Data is displayed on a React-based frontend."
-
-    classDef blue fill:#B3E5FC,stroke:#0288D1,stroke-width:2px;
-    classDef green fill:#C8E6C9,stroke:#388E3C,stroke-width:2px;
-    classDef orange fill:#FFE0B2,stroke:#F57C00,stroke-width:2px;
-    classDef purple fill:#E1BEE7,stroke:#8E24AA,stroke-width:2px;
-    classDef lightgreen fill:#DCEDC8,stroke:#689F38,stroke-width:2px;
-
-    class A1,A2 blue
-    class B1 green
-    class C1 orange
-    class D1 purple
-    class E1 lightgreen
-```
-
-```mermaid
-flowchart TD
-
     subgraph Scraping_Project
         A1[Scrapy Spiders] --> A2[Item Pipelines]
         click A1 "Scrapy Spiders regularly crawl MMA websites for fighter data."

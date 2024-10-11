@@ -1,24 +1,13 @@
 version: '3.9'
 services:
   backend:
-    build: ./backend  # Build the backend container using the Dockerfile in the ./backend directory
+    build:
+      context: ./backend
+    container_name: backend
+    env_file: ./backend/.env
     ports:
-      - "5000:5000"   # Expose port 5000 of the container on port 5000 of the host
+      - "5050:5050"
     environment:
-      - DATABASE_HOST=db
-      - DATABASE_USER=${DB_USER}
-      - DATABASE_PW=${DB_PW}
-      - DATABASE_NAME=${DB_NAME}
-    depends_on:
-      - db            # Ensure the database container starts before the backend
-
-  db:
-    image: postgres:14
-    volumes:
-      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
-    environment:
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PW}
-      POSTGRES_DB: ${DB_NAME}
-    ports:
-      - "5432:5432"   # Expose PostgreSQL on port 5432
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PW: ${DATABASE_PW}

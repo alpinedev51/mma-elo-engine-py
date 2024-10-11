@@ -2,11 +2,15 @@
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
+import os
+import sys
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
 
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from itemadapter import ItemAdapter
-from mma_scraper.models import Fighter, Fight, Event, EloRecord
+from app.models import Fighter, Fight, Event, EloRecord
 
 
 class MmaScraperPipeline:

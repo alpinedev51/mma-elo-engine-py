@@ -15,4 +15,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 EXPOSE 5050
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "5050"]
+CMD service postgresql start && \
+    python /app/create_database.py && \
+    uvicorn app.main:app --host 0.0.0.0 --port 5050

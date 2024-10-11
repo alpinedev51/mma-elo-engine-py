@@ -93,9 +93,7 @@ flowchart TD
     class E1 lightgreen
 ```
 
-flowchart TD
-
-    %% Define separate projects with clearer structure
+```mermaid
     subgraph Scraping_Project
         A1[Scrapy Spiders] --> A2[Item Pipelines]
         click A1 "Scrapy Spiders regularly crawl MMA websites for fighter data."
@@ -116,21 +114,18 @@ flowchart TD
         click E1 "Data is displayed on a React-based frontend."
     end
 
-    %% Define styles for different components
-    classDef blue fill:#B3E5FC,stroke:#0288D1,stroke-width:2px;    %% Scraping
-    classDef green fill:#C8E6C9,stroke:#388E3C,stroke-width:2px;   %% Database
-    classDef orange fill:#FFE0B2,stroke:#F57C00,stroke-width:2px;  %% Elo Processing
-    classDef purple fill:#E1BEE7,stroke:#8E24AA,stroke-width:2px;  %% API
-    classDef lightgreen fill:#DCEDC8,stroke:#689F38,stroke-width:2px; %% Frontend
+    classDef blue fill:#B3E5FC,stroke:#0288D1,stroke-width:2px;
+    classDef green fill:#C8E6C9,stroke:#388E3C,stroke-width:2px;
+    classDef orange fill:#FFE0B2,stroke:#F57C00,stroke-width:2px;
+    classDef purple fill:#E1BEE7,stroke:#8E24AA,stroke-width:2px;
+    classDef lightgreen fill:#DCEDC8,stroke:#689F38,stroke-width:2px;
 
-    %% Assign styles to nodes
     class A1,A2 blue;
     class B1 green;
     class C1 orange;
     class D1 purple;
     class E1 lightgreen;
-
-
+```
 
 ## Technical Overview
 

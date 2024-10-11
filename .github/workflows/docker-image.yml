@@ -36,6 +36,15 @@ jobs:
           -p 5050:5050 \
           my-image-name:latest
     
-    - name: Check Logs
-      run: docker logs $(docker ps -q --filter "name=backend")
+    - name: List Running Containers
+      run: docker ps -a
+
+    - name: Check Backend Logs
+      run: |
+        CONTAINER_ID=$(docker ps -q --filter "name=backend")
+        if [ -n "$CONTAINER_ID" ]; then
+          docker logs "$CONTAINER_ID"
+        else
+          echo "No backend container running."
+        fi
         

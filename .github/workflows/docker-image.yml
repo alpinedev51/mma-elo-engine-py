@@ -36,7 +36,7 @@ jobs:
         echo "DATABASE_PORT=${{ secrets.DATABASE_PORT }}" >> $GITHUB_ENV
         
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build . --file backend/Dockerfile --tag my-image-name:$(date +%s)
 
     - name: Run Backend
       run: docker-compose up --build -d

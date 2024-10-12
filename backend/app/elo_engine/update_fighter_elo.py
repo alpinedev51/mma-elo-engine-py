@@ -36,12 +36,10 @@ def update_elo_ratings(event_id, session):
     :param event_id: The ID of the event to process.
     :param session: The database session.
     """
-    # Fetch the event and related fights
     fights = session.query(Fight).filter(Fight.event_id == event_id).all()
     
     elo_updates = []
 
-    # Process each fight in the event
     for fight in fights:
         elo_updates.extend(update_fighter_elo(fight, session, event_id))
     

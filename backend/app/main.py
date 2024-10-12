@@ -6,8 +6,8 @@ from typing import List
 from .database import init_db, get_db
 from fastapi.middleware.cors import CORSMiddleware
 
-# Create the database
-init_db()
+# Create the database tables
+# init_db()
 
 app = FastAPI()
 
@@ -30,7 +30,9 @@ async def root():
 
 @app.get("/fighters/search", response_model=List[schemas.FighterResponse], status_code=status.HTTP_200_OK)
 def search_fighter_by_name(fighter_name: str, db: Session = Depends(get_db)):
-    fighters = crud.get_fighter_by_name(db, fighter_name)
+    if not fighter_name or fighter_name.strip() == "":
+        return []
+    fighters = crud.get_fighter_by_name(db, fighter_name.strip())
     if not fighters:
         raise HTTPException(status_code=404, detail=f"Fighter with name {fighter_name} not found")
     return fighters
@@ -51,7 +53,9 @@ def read_fighters(skip: int = 0, limit: int = 10, db: Session = Depends(get_db))
 
 @app.get("/events/search", response_model=List[schemas.EventResponse], status_code=status.HTTP_200_OK)
 def search_event_by_name(event_name: str, db: Session = Depends(get_db)):
-    events = crud.get_event_by_name(db, event_name)
+    if not event_name or event_name.strip() == "":
+        return []
+    events = crud.get_event_by_name(db, event_name.strip())
     if not events:
         raise HTTPException(status_code=404, detail=f"Event with name {event_name} not found")
     return events
@@ -72,7 +76,9 @@ def read_events(skip: int = 0, limit: int = 0, db: Session = Depends(get_db)):
 
 @app.get("/fights/search", response_model=List[schemas.FightResponse], status_code=status.HTTP_200_OK)
 def search_fights_with_fighter(fighter_name: str, db: Session = Depends(get_db)):
-    fights = crud.get_fights_with_fighter(db, fighter_name)
+    if not fighter_name or fighter_name.strip() == "":
+        return []
+    fights = crud.get_fights_with_fighter(db, fighter_name.strip())
     if not fights:
         raise HTTPException(status_code=404, detail="Fights not found")
     return fights
@@ -93,7 +99,9 @@ def read_fights(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
 
 @app.get("/elo-records/search", response_model=List[schemas.EloRecordByFighterResponse], status_code=status.HTTP_200_OK)
 def read_elo_records_by_fighter(fighter_name: str, db: Session = Depends(get_db)):
-    elo_records = crud.get_elo_records_by_fighter(db, fighter_name)
+    if not fighter_name or fighter_name.strip() == "":
+        return []
+    elo_records = crud.get_elo_records_by_fighter(db, fighter_name.strip())
     if not elo_records:
         raise HTTPException(status_code=404, detail="No Elo records returned...")
     return elo_records

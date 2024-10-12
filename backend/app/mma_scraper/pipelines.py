@@ -40,10 +40,14 @@ class MmaScraperPipeline:
         event_name = adapter.get("event_name_info")
         event_date = adapter.get("event_date_info")
         event = self.session.query(Event).filter_by(event_name=event_name).first()
-        if not event:
-            event = Event(event_name=event_name, event_date=event_date)
-            self.session.add(event)
-            self.session.commit()
+        
+        # If event already exists, skip further processing
+        if event:
+            return item  # Skip processing if the event already exists
+
+        event = Event(event_name=event_name, event_date=event_date)
+        self.session.add(event)
+        self.session.commit()
 
         # handle fighters
         fighter_1_name = adapter.get("fighter_1_name_info")

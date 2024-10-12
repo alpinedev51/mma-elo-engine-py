@@ -19,7 +19,7 @@ const Fighter = () => {
     };
 
     return (
-        <div>
+        <div className="fighter-stats">
             <h2>Search Fighter</h2>
             <input
                 type="text"

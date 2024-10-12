@@ -1,4 +1,4 @@
-from app.models import Fighter, Event
+from app.models import Fighter, Event, EloRecord
 from app.elo_engine.update_fighter_elo import update_elo_ratings
 
 def reset_fighter_elo(session, base_elo=1000):
@@ -7,14 +7,25 @@ def reset_fighter_elo(session, base_elo=1000):
     
     :param session: The database session.
     """
-    # Fetch all fighters from the database
     fighters = session.query(Fighter).all()
     
-    # Reset each fighter's ELO rating to 1000
+    session.query(EloRecord).delete()
+    elo_record_count = session.query(EloRecord).count()
+    if elo_record_count == 0:
+        print("EloRecord table is empty after deletion.")
+    else:
+        raise ValueError("EloRecord table should be empty after deletion.")
+    
     for fighter in fighters:
         fighter.elo_rating = base_elo
+        new_record = EloRecord(fighter_id=fighter.id, elo_rating=base_elo, event_id=None)
+        session.add(new_record)
+        elo_record_count += 1
+        
+    fighters_count = session.query(Fighter).count()
+    if elo_record_count != fighters_count:
+        raise ValueError("Elo Record count should have same number of entries as Fighters.")
     
-    # Commit the changes to the session
     session.commit()
     print(f"Reset ELO ratings for {len(fighters)} fighters.")
 
@@ -24,13 +35,10 @@ def update_all_fighters_elo(session):
     
     :param session: The database session.
     """
-    # Reset all fighter ELO ratings (default is to 1000)
     reset_fighter_elo(session)
     
-    # Fetch all events in chronological order (assuming events have a date field)
     events = session.query(Event).order_by(Event.event_date).all()
     
-    # Process each event and update ELO ratings
     for event in events:
         print(f"Processing event {event.id} ({event.event_name})...")
         update_elo_ratings(event.id, session)
@@ -38,14 +46,10 @@ def update_all_fighters_elo(session):
         print(f"Updated ELO ratings for event {event.id}.")
 
 if __name__ == "__main__":
-    # Assuming you have an existing session setup elsewhere, import it
-    from app.database import get_db  # Replace with your actual engine import
+    from app.database import get_db
     
-    # Create a session
     db = next(get_db())
     
-    # Update all fighters' ELO ratings
     update_all_fighters_elo(db)
     
-    # Close the session
     db.close()

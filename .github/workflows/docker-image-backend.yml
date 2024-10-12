@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker Backend Image CI
 
 on:
   push:
@@ -25,7 +25,8 @@ jobs:
         echo "DATABASE_HOST=${{ secrets.DATABASE_HOST }}" >> $GITHUB_ENV
 
     - name: Build the Docker image
-      run: docker build . --file backend/Dockerfile --tag backend:latest
+      working-directory: ./backend
+      run: docker build . --file Dockerfile --tag backend:latest
 
     - name: Run Backend
       run: |

@@ -3,13 +3,11 @@ services:
   db:
     build:
       context: ./db
-    container_name: db
+    container_name: db_container
     environment:
-      - DATABASE_NAME=${DATABASE_NAME}
-      - DATABASE_USER=${DATABASE_USER}
-      - DATABASE_PW=${DATABASE_PW}
-    secrets:
-      - db_password
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PW}
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./db/init:/docker-entrypoint-initdb.d/
@@ -26,7 +24,8 @@ services:
       context: ./backend
     container_name: backend_service
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       - DATABASE_NAME=${DATABASE_NAME}
       - DATABASE_USER=${DATABASE_USER}
@@ -35,12 +34,6 @@ services:
       - DATABASE_PORT=5432
     ports:
       - "5050:5050"
-    links:
-      - db
 
 volumes:
   postgres_data:
-
-secrets:
-  db_password:
-    file: ./secrets/db_password.txt

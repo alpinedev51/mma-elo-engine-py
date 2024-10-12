@@ -18,13 +18,13 @@ def reset_fighter_elo(session, base_elo=1000):
     
     for fighter in fighters:
         fighter.elo_rating = base_elo
-        #new_record = EloRecord(fighter_id=fighter.id, elo_rating=base_elo, event_id=None)
-        #session.add(new_record)
+        new_record = EloRecord(fighter_id=fighter.id, elo_rating=base_elo, event_id=None)
+        session.add(new_record)
+        elo_record_count += 1
         
-    #elo_record_count = session.query(EloRecord).count()
-    #fighters_count = session.query(Fighter).count()
-    #if elo_record_count != fighters_count:
-    #    raise ValueError("Elo Record count should have same number of entries as Fighters.")
+    fighters_count = session.query(Fighter).count()
+    if elo_record_count != fighters_count:
+        raise ValueError("Elo Record count should have same number of entries as Fighters.")
     
     session.commit()
     print(f"Reset ELO ratings for {len(fighters)} fighters.")

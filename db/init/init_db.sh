@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Replace placeholders with actual environment variables and run the SQL commands
+psql -U "$DATABASE_USER" -h "$DATABASE_HOST" -c "CREATE DATABASE $DATABASE_NAME;"
+psql -U "$DATABASE_USER" -h "$DATABASE_HOST" -c "CREATE USER '$DATABASE_USER' WITH ENCRYPTED PASSWORD '$DATABASE_PW';"
+psql -U "$DATABASE_USER" -h "$DATABASE_HOST" -c "GRANT ALL PRIVILEGES ON DATABASE $DATABASE_NAME TO '$DATABASE_USER';"

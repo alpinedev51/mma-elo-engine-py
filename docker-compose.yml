@@ -9,7 +9,7 @@ services:
       - DATABASE_USER=${DATABASE_USER}
       - DATABASE_PW=${DATABASE_PW}
     secrets:
-      db_password
+      - db_password
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./db/init:/docker-entrypoint-initdb.d/
@@ -39,7 +39,7 @@ services:
       - db
 
 volumes:
-  - postgres_data
+  postgres_data:
 
 secrets:
   db_password:

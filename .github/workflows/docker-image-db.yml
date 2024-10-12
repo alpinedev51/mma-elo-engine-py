@@ -18,9 +18,9 @@ jobs:
 
     - name: Load environment variables
       run: |
-        echo "DATABASE_NAME=${{ secrets.DATABASE_NAME }}" >> $GITHUB_ENV
-        echo "DATABASE_USER=${{ secrets.DATABASE_USER }}" >> $GITHUB_ENV
-        echo "DATABASE_PW=${{ secrets.DATABASE_PW }}" >> $GITHUB_ENV
+        echo "POSTGRES_DB=${{ secrets.DATABASE_NAME }}" >> $GITHUB_ENV
+        echo "POSTGRES_USER=${{ secrets.DATABASE_USER }}" >> $GITHUB_ENV
+        echo "POSTGRES_PASSWORD=${{ secrets.DATABASE_PW }}" >> $GITHUB_ENV
         echo "DATABASE_PORT=${{ secrets.DATABASE_PORT }}" >> $GITHUB_ENV
         echo "DATABASE_HOST=${{ secrets.DATABASE_HOST }}" >> $GITHUB_ENV
 
@@ -32,10 +32,9 @@ jobs:
       run: |
         # Start the container in detached mode
         docker run -d \
-          --env DATABASE_NAME=${{ secrets.DATABASE_NAME }} \
-          --env DATABASE_USER=${{ secrets.DATABASE_USER }} \
-          --env DATABASE_PW=${{ secrets.DATABASE_PW }} \
-          --env DATABASE_HOST=${{ secrets.DATABASE_HOST }} \
+          --env POSTGRES_DB=${{ secrets.DATABASE_NAME }} \
+          --env POSTGRES_USER=${{ secrets.DATABASE_USER }} \
+          --env POSTGRES_PASSWORD=${{ secrets.DATABASE_PW }} \
           -p 5432:5432 \
           --name db_container \
           db:latest

@@ -1,10 +1,10 @@
 # MMA Elo Engine
 
 #### Updates
-[10/10/2024]
+[10/11/2024]
 - Only supports UFC fights as of now.
 - Scraping is working (Scrapy).
-- Data is updated and stored in PostgreSQL database (locally as of now).
+- Data is updated and stored in PostgreSQL database (locally as of now, still working on deployment to vps or cloud container service).
 - Elo engine is working.
 - Upated schema to have a separate table for Elo history.
 - Created functions in database for quicker access to fighter Elo history.

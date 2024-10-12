@@ -1,13 +1,46 @@
 version: '3.9'
 services:
+  db:
+    build:
+      context: ./db
+    container_name: db
+    environment:
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_USER=${DATABASE_USER}
+      - DATABASE_PW=${DATABASE_PW}
+    secrets:
+      db_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d/
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  
   backend:
     build:
       context: ./backend
-    container_name: backend
-    env_file: ./backend/.env
+    container_name: backend_service
+    depends_on:
+      - db
+    environment:
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_USER=${DATABASE_USER}
+      - DATABASE_PW=${DATABASE_PW}
+      - DATABASE_HOST=db
+      - DATABASE_PORT=5432
     ports:
       - "5050:5050"
-    environment:
-      DATABASE_NAME: ${DATABASE_NAME}
-      DATABASE_USER: ${DATABASE_USER}
-      DATABASE_PW: ${DATABASE_PW}
+    links:
+      - db
+
+volumes:
+  - postgres_data
+
+secrets:
+  db_password:
+    file: ./secrets/db_password.txt

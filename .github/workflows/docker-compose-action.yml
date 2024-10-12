@@ -18,9 +18,9 @@ jobs:
 
     - name: Load environment variables
       run: |
-        echo "DATABASE_NAME=${{ secrets.DATABASE_NAME }}" >> $GITHUB_ENV
-        echo "DATABASE_USER=${{ secrets.DATABASE_USER }}" >> $GITHUB_ENV
-        echo "DATABASE_PW=${{ secrets.DATABASE_PW }}" >> $GITHUB_ENV
+        echo "POSTGRES_DB=${{ secrets.DATABASE_NAME }}" >> $GITHUB_ENV
+        echo "POSTGRES_USER=${{ secrets.DATABASE_USER }}" >> $GITHUB_ENV
+        echo "POSTGRES_PASSWORD=${{ secrets.DATABASE_PW }}" >> $GITHUB_ENV
         echo "DATABASE_PORT=${{ secrets.DATABASE_PORT }}" >> $GITHUB_ENV
         echo "DATABASE_HOST=${{ secrets.DATABASE_HOST }}" >> $GITHUB_ENV
 

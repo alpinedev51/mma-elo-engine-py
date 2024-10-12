@@ -24,7 +24,7 @@ jobs:
         echo "DATABASE_PORT=${{ secrets.DATABASE_PORT }}" >> $GITHUB_ENV
 
     - name: Build the Docker image
-      run: docker build . --file backend/Dockerfile --tag my-image-name:latest
+      run: docker build . --file backend/Dockerfile --tag backend:latest
 
     - name: Run Backend
       run: |
@@ -34,7 +34,7 @@ jobs:
           --env DATABASE_USER=${{ secrets.DATABASE_USER }} \
           --env DATABASE_PW=${{ secrets.DATABASE_PW }} \
           -p 5050:5050 \
-          my-image-name:latest
+          backend:latest
     
     - name: List Running Containers
       run: docker ps -a

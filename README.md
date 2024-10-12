@@ -56,14 +56,11 @@ flowchart TD
         W1[UFC Public Stats]
     end
 
-    subgraph Scraping_Project
+    subgraph Backend
         A1[Scrapy Spiders] --> W1
         W1 --> A2[Item Pipelines]
         click A1 "Scrapy Spiders regularly crawl MMA websites for fighter data."
         click A2 "Pipelines process and store the fighter data into the database."
-    end
-
-    subgraph Backend
         B1[(PostgreSQL Database)] --> C1[Initial Elo Calculation + Weekly Updates]
         C1 --> B1
         D1[API Endpoints] --> B1

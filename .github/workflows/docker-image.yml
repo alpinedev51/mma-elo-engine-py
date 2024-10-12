@@ -41,9 +41,9 @@ jobs:
 
     - name: Check Backend Logs
       run: |
-        CONTAINER_ID=$(docker ps -q --filter "name=backend")
+        CONTAINER_ID=$(docker ps -aq --filter "ancestor=backend:latest")
         if [ -n "$CONTAINER_ID" ]; then
-          docker logs "$CONTAINER_ID"
+          docker logs "$CONTAINER_ID" || echo "No logs available."
         else
           echo "No backend container running."
         fi

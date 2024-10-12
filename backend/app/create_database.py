@@ -5,12 +5,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-DB_USER = os.getenv("DATABASE_USER")
-DB_PW = os.getenv("DATABASE_PW")
+DB_USER = os.getenv("POSTGRES_USER")
+DB_PW = os.getenv("POSTGRES_PASSWORD")
 DB_HOST = os.getenv("DATABASE_HOST")
 DB_PORT = os.getenv("DATABASE_PORT")
 SUPER_DB = os.getenv("SUPER_DATABASE")
-DB_NAME = os.getenv("DATABASE_NAME")
+DB_NAME = os.getenv("POSTGRES_DB")
  
 # connection establishment
 conn = psycopg2.connect(

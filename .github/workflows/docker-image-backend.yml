@@ -35,6 +35,7 @@ jobs:
           --env DATABASE_NAME=${{ secrets.DATABASE_NAME }} \
           --env DATABASE_USER=${{ secrets.DATABASE_USER }} \
           --env DATABASE_PW=${{ secrets.DATABASE_PW }} \
+          --name backend_container \
           -p 5050:5050 \
           backend:latest
     

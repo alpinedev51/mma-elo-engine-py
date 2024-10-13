@@ -17,7 +17,7 @@ app.add_middleware(
     allow_origins=["http://localhost:3000"],
     allow_credentials=True,
     allow_methods=["GET"],
-    allow_headers=["*"]
+    allow_headers=["Authorization", "Content-Type"]
 )
 
 @app.get("/health")
@@ -29,10 +29,10 @@ async def root():
     return {"message": "Welcome to the MMA ELO Engine API"}
 
 @app.get("/fighters/search", response_model=List[schemas.FighterResponse], status_code=status.HTTP_200_OK)
-def search_fighter_by_name(fighter_name: str, db: Session = Depends(get_db)):
+def search_fighter_by_name(fighter_name: str, sort: str = None, order: str = "desc", db: Session = Depends(get_db)):
     if not fighter_name or fighter_name.strip() == "":
         return []
-    fighters = crud.get_fighter_by_name(db, fighter_name.strip())
+    fighters = crud.get_fighter_by_name(db, fighter_name.strip(), sort, order)
     if not fighters:
         raise HTTPException(status_code=404, detail=f"Fighter with name {fighter_name} not found")
     return fighters

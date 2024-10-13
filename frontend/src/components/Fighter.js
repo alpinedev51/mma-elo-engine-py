@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getFighter } from '../services/apiService';
+import { getFightersByName } from '../services/apiService';
 
 const Fighter = () => {
     const [fighterName, setFighterName] = useState('');
@@ -10,7 +10,7 @@ const Fighter = () => {
         setError('');
         setFighter([]);
         try {
-            const records = await getFighter(fighterName);
+            const records = await getFightersByName(fighterName, 'elo_rating', 'desc');
             console.log(records)
             setFighter(records);
         } catch (err) {

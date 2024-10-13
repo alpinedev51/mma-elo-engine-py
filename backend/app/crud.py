@@ -1,10 +1,16 @@
 from sqlalchemy.orm import Session
-from sqlalchemy import text
+from sqlalchemy import text, asc, desc
 from .models import Fighter, Fight, Event
 
 # /fighters/search
-def get_fighter_by_name(db: Session, fighter_name: str):
-    return db.query(Fighter).filter(Fighter.fighter_name.ilike(f"%{fighter_name}%")).all()
+def get_fighter_by_name(db: Session, fighter_name: str, sort: str, order: str):
+    query = db.query(Fighter).filter(Fighter.fighter_name.ilike(f"%{fighter_name}%"))
+    if sort == 'elo_rating':
+        if order == 'asc':
+            query = query.order_by(asc(Fighter.elo_rating))
+        elif order == 'desc':
+            query = query.order_by(desc(Fighter.elo_rating))
+    return query.all()
 
 # /fighters/{fighter_id}
 def get_fighter_by_id(db: Session, fighter_id: int):
@@ -49,8 +55,12 @@ def get_fights(db: Session, skip: int = 0, limit: int = 10):
 # /elo-records/search
 def get_elo_records_by_fighter(db: Session, fighter_name: str):
     result = db.execute(
-        text("SELECT * FROM get_elo_records_by_fighter(:fighter_name_arg)"),
-        {"fighter_name_arg": fighter_name}
+        text("SELECT * FROM get_elo_records_by_fighter(:fighter_name_arg, :sort_column_arg, :sort_order_arg)"),
+        {
+            "fighter_name_arg": fighter_name,
+            "sort_column_arg": "elo_rating",
+            "sort_order_arg": "desc"
+        }
     )
     records = result.fetchall()
     elo_records = [row._mapping for row in records]

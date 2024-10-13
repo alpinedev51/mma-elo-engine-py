@@ -12,10 +12,15 @@ export const getFighters = async () => {
 };
 
 // Function to fetch Elo records by fighter name
-export const getFighter = async (fighterName) => {
+export const getFightersByName = async (fighterName, sort, order) => {
     try {
         const response = await api.get('/fighters/search', {
-            params: { fighter_name: fighterName }
+            params: 
+            { 
+                fighter_name: fighterName,
+                sort: sort,
+                order: order
+            }
         });
         return response.data;
     } catch (error) {

@@ -6,9 +6,6 @@ from typing import List
 from .database import init_db, get_db
 from fastapi.middleware.cors import CORSMiddleware
 
-# Create the database tables
-# init_db()
-
 app = FastAPI()
 
 # Add CORS middleware

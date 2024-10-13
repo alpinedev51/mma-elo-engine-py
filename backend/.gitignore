@@ -9,6 +9,4 @@ __pycache__/
 *.pyo
 *.pyd
 
-**/create_database.py
-
 app/mma_scraper/scrapy.log

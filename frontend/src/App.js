@@ -1,6 +1,7 @@
 import React from 'react';
 import Fighter from './components/Fighter';
 import EloRecordsByFighter from './components/EloRecordsByFighter';
+import Events from './components/Events';
 import './App.css';
 import './Stats.css';
 
@@ -28,6 +29,9 @@ const App = () => {
                     </div>
                     <div id="elo-records" className="content-section EloRecordsByFighter">
                         <EloRecordsByFighter />
+                    </div>
+                    <div id="events" className="content-section Events">
+                        <Events />
                     </div>
                 </div>
             </div>

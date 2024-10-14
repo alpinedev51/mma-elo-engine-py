@@ -99,7 +99,7 @@ body {
     align-items: center;
   }
 
-  .Fighter, .EloRecordsByFighter {
+  .Fighter, .EloRecordsByFighter, .Events {
     width: 100%;
     margin-bottom: 20px;
   }

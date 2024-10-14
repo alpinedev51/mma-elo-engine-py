@@ -3,7 +3,7 @@ from . import crud
 from . import schemas
 from sqlalchemy.orm import Session
 from typing import List
-from .database import init_db, get_db
+from .database import get_db
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -19,14 +19,14 @@ app.add_middleware(
 
 @app.get("/health")
 def health_check():
-    return {"status": "ok :D"}
+    return {"status": "ok"}
 
 @app.get("/")
 async def root():
     return {"message": "Welcome to the MMA ELO Engine API"}
 
 @app.get("/fighters/search", response_model=List[schemas.FighterResponse], status_code=status.HTTP_200_OK)
-def search_fighter_by_name(fighter_name: str, sort: str = None, order: str = "desc", db: Session = Depends(get_db)):
+def search_fighter_by_name(fighter_name: str, sort: str = 'elo_rating', order: str = "desc", db: Session = Depends(get_db)):
     if not fighter_name or fighter_name.strip() == "":
         return []
     fighters = crud.get_fighter_by_name(db, fighter_name.strip(), sort, order)
@@ -42,8 +42,8 @@ def read_fighter_by_id(fighter_id: int, db: Session = Depends(get_db)):
     return fighter
 
 @app.get("/fighters/", response_model=List[schemas.FighterResponse], status_code=status.HTTP_200_OK)
-def read_fighters(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
-    fighters = crud.get_fighters(db, skip=skip, limit=limit)
+def read_fighters(skip: int = 0, limit: int = 10, sort: str = 'elo_rating', order: str = 'desc', db: Session = Depends(get_db)):
+    fighters = crud.get_fighters(db, skip=skip, limit=limit, sort=sort, order=order)
     if not fighters:
         raise HTTPException(status_code=404, detail="No fighters returned...")
     return fighters
@@ -65,8 +65,8 @@ def read_event_by_id(event_id: int, db: Session = Depends(get_db)):
     return event
 
 @app.get("/events/", response_model=List[schemas.EventResponse], status_code=status.HTTP_200_OK)
-def read_events(skip: int = 0, limit: int = 0, db: Session = Depends(get_db)):
-    events = crud.get_events(db, skip, limit)
+def read_events(skip: int = 0, limit: int = 10, sort: str = 'event_date', order: str = 'desc', db: Session = Depends(get_db)):
+    events = crud.get_events(db, skip, limit, sort, order)
     if not events:
         raise HTTPException(status_code=404, detail=f"Events not returned...")
     return events

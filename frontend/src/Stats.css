@@ -12,7 +12,7 @@
 }
 
 .Events {
-    margin-left: 40px;
+    margin-left: 20px;
 }
 
 .elo-records {
@@ -27,14 +27,33 @@
     color: #eeeeee;
 }
 
+.event-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
 .events-list {
     padding: 0px;
     background-color: #1e1e1e;
     color: #eeeeee;
 }
 
-.events-list-input-group {
-    margin-bottom: 8px;
+.events-options-input-group {
+    display: flex;
+}
+
+.events-options-input-group label {
+    flex: 1;
+    text-align: left;
+    margin-right: 8px;
+}
+
+.events-options-input-group input,
+.events-options-input-group select {
+    flex: 1;
+    text-align: right;
 }
 
 .elo-records ul {
@@ -53,13 +72,13 @@
 }
 
 .elo-records li {
-    font-size: 18px;
+    font-size: 14px;
     line-height: 1.5;
     color: #cccccc;
 }
 
 .fighter-stats li {
-    font-size: 18px;
+    font-size: 14px;
     line-height: 1.5;
     color: #cccccc;
 }
@@ -71,17 +90,17 @@
 }
 
 .elo-records li::marker {
-    font-size: 10px;
+    font-size: 14px;
     color: #ffffff;
 }
 
 .fighter-stats li::marker {
-    font-size: 12px;
+    font-size: 14px;
     color: #ffffff;
 }
 
 .events-list li::marker {
-    font-size: 12px;
+    font-size: 14px;
     color: #ffffff;
 }
   
@@ -91,6 +110,7 @@
     border-radius: 5px;
     background-color: #333333;
     color: #ffffff;
+    margin-bottom: 10px;
 }
   
 .search-button:hover {

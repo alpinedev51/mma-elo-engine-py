@@ -13,13 +13,14 @@ body {
 .main-content {
   flex-grow: 1;
   padding: 20px;
-  background-color: #fff;
+  background-color: #726328;
   overflow-y: auto;
 }
 
 .app-content-section {
   background-color: #282c34;
   min-height: 100vh;
+  border-radius: 4px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -39,7 +40,7 @@ body {
   color: #ffffff;
   font-family: monospace;
   font-size: 32px;
-  background-color: #003057;
+  background-color: #002645;
   border-radius: 5px;
   padding: 20px;
   text-align: center;

@@ -1,14 +1,13 @@
 # MMA Elo Engine
 
 #### Updates
-[10/11/2024]
+[10/13/2024]
 - Only supports UFC fights as of now.
-- Scraping is working (Scrapy).
-- Data is updated and stored in PostgreSQL database (locally as of now, still working on deployment to vps or cloud container service).
-- Elo engine is working.
-- Upated schema to have a separate table for Elo history.
-- Created functions in database for quicker access to fighter Elo history.
-- Currently working on implementing the backend in Rust.
+- Full stack is fully functional from end to end.
+- Frontend is WIP only supporting Elo records and fighter searches.
+- Polish CRUD and API endpoints.
+- Create scheduler for automated scraping and elo engine update workflow.
+- Currently very slowly working on implementing the backend in Rust.
 
 ## Introduction
 The MMA Elo Engine is a tool designed to help answer the age-old question: "Who is the best fighter?" In the world of mixed martial arts (MMA), rankings can often be subjective and hotly debated. This project leverages the Elo rating system, traditionally used in chess, to evaluate fighters' performance based on head-to-head contests. By scraping data from various MMA organizations, we calculate Elo scores that provide a quantifiable measure of a fighter's skill level. This engine aids in ranking fighters and also fuels discussions about their abilities, making the conversation about "the best" more data-driven and insightful. This engine also utilizes fast methods in scraping, storing, and processing data that scale well, providing an effective framework to build off of for Elo ranking systems for other competitive endeavors such as tennis, BJJ, 1v1 esports, fencing, etc.

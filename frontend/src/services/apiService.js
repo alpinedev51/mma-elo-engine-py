@@ -51,7 +51,7 @@ export const getFights = async () => {
 // Get all events
 export const getEvents = async (skip, limit, sort, order) => {
     try {
-        const response = await api.get('/events', {
+        const response = await api.get('/events/', {
             params:
             {
                 skip: skip,

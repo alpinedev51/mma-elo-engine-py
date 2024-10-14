@@ -1,4 +1,4 @@
-.Fighter, .EloRecordsByFighter {
+.Fighter, .EloRecordsByFighter, .Events {
     flex: 1;
     padding: 20px;
     background-color: #1e1e1e; /* Slightly lighter background for component containers */
@@ -9,6 +9,10 @@
 
 .EloRecordsByFighter {
     margin-left: 20px;
+}
+
+.Events {
+    margin-left: 40px;
 }
 
 .elo-records {
@@ -23,12 +27,27 @@
     color: #eeeeee;
 }
 
+.events-list {
+    padding: 0px;
+    background-color: #1e1e1e;
+    color: #eeeeee;
+}
+
+.events-list-input-group {
+    margin-bottom: 8px;
+}
+
 .elo-records ul {
     list-style-type: disc;
     padding-left: 0px;
 }
 
 .fighter-stats ul {
+    list-style-type: disc;
+    padding-left: 0px;
+}
+
+.events-list ul {
     list-style-type: disc;
     padding-left: 0px;
 }
@@ -45,12 +64,23 @@
     color: #cccccc;
 }
 
+.events-list li {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #cccccc;
+}
+
 .elo-records li::marker {
     font-size: 10px;
     color: #ffffff;
 }
 
 .fighter-stats li::marker {
+    font-size: 12px;
+    color: #ffffff;
+}
+
+.events-list li::marker {
     font-size: 12px;
     color: #ffffff;
 }

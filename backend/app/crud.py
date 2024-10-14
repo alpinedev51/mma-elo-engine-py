@@ -18,7 +18,7 @@ def get_fighter_by_id(db: Session, fighter_id: int):
 
 # /fighters/
 def get_fighters(db: Session, skip: int = 0, limit: int = 10, sort: str = 'elo_rating', order: str = 'desc'):
-    query = db.query(Fighter).offset(skip).limit(limit)
+    query = db.query(Fighter)
     if sort == 'elo_rating':
         if order == 'asc':
             query = query.order_by(asc(Fighter.elo_rating))
@@ -29,7 +29,7 @@ def get_fighters(db: Session, skip: int = 0, limit: int = 10, sort: str = 'elo_r
             query = query.order_by(asc(Fighter.fighter_name))
         elif order == 'desc':
             query = query.order_by(desc(Fighter.fighter_name))
-    return query.all()
+    return query.offset(skip).limit(limit).all()
 
 # /events/search
 def get_event_by_name(db: Session, event_name: str, sort: str = 'event_date', order: str = 'desc'):
@@ -47,13 +47,13 @@ def get_event_by_id(db: Session, event_id: int):
 
 # /events/
 def get_events(db: Session, skip: int = 0, limit: int = 10, sort: str = 'event_date', order: str = 'desc'):
-    query = db.query(Event).offset(skip).limit(limit)
+    query = db.query(Event)
     if sort == 'event_date':
         if order == 'asc':
             query = query.order_by(asc(Event.event_date))
         elif order == 'desc':
             query = query.order_by(desc(Event.event_date))
-    return query.all()
+    return query.offset(skip).limit(limit).all()
 
 # /fights/search
 def get_fights_with_fighter(db: Session, fighter_name: str):

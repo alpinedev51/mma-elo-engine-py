@@ -65,8 +65,8 @@ def read_event_by_id(event_id: int, db: Session = Depends(get_db)):
     return event
 
 @app.get("/events/", response_model=List[schemas.EventResponse], status_code=status.HTTP_200_OK)
-def read_events(skip: int = 0, limit: int = 0, db: Session = Depends(get_db)):
-    events = crud.get_events(db, skip, limit)
+def read_events(skip: int = 0, limit: int = 10, sort: str = 'event_date', order: str = 'desc', db: Session = Depends(get_db)):
+    events = crud.get_events(db, skip, limit, sort, order)
     if not events:
         raise HTTPException(status_code=404, detail=f"Events not returned...")
     return events

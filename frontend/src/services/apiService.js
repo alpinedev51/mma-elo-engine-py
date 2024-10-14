@@ -6,9 +6,22 @@ const api = axios.create({
 });
 
 // Get all fighters
-export const getFighters = async () => {
-    const response = await api.get('/fighters');
-    return response.data;
+export const getFighters = async (skip, limit, sort, order) => {
+    try {
+        const response = await api.get('/fighters', {
+            params:
+            {
+                skip: skip,
+                limit: limit,
+                sort: sort,
+                order: order
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching fighters:', error);
+        throw error;
+    }
 };
 
 // Function to fetch Elo records by fighter name
@@ -24,7 +37,7 @@ export const getFightersByName = async (fighterName, sort, order) => {
         });
         return response.data;
     } catch (error) {
-        console.error('Error fetching Elo records:', error);
+        console.error('Error fetching fighter records:', error);
         throw error;
     }
 };
@@ -42,10 +55,15 @@ export const getEvents = async () => {
 };
 
 // Function to fetch Elo records by fighter name
-export const getEloRecordsByFighter = async (fighterName) => {
+export const getEloRecordsByFighter = async (fighterName, sort, order) => {
     try {
         const response = await api.get('/elo-records/search', {
-            params: { fighter_name: fighterName }
+            params: 
+            { 
+                fighter_name: fighterName,
+                sort: sort,
+                order: order
+            }
         });
         return response.data;
     } catch (error) {

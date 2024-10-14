@@ -3,7 +3,7 @@ from sqlalchemy import text, asc, desc
 from .models import Fighter, Fight, Event
 
 # /fighters/search
-def get_fighter_by_name(db: Session, fighter_name: str, sort: str, order: str):
+def get_fighter_by_name(db: Session, fighter_name: str, sort: str = 'elo_rating', order: str = 'desc'):
     query = db.query(Fighter).filter(Fighter.fighter_name.ilike(f"%{fighter_name}%"))
     if sort == 'elo_rating':
         if order == 'asc':

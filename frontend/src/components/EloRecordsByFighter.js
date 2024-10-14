@@ -10,8 +10,7 @@ const EloRecordsByFighter = () => {
         setError('');
         setEloRecordsByFighter([]);
         try {
-            const records = await getEloRecordsByFighter(fighterName);
-            console.log(records)
+            const records = await getEloRecordsByFighter(fighterName, 'elo_rating', 'desc');
             setEloRecordsByFighter(records);
         } catch (err) {
             setError('No Elo records returned for this fighter.');

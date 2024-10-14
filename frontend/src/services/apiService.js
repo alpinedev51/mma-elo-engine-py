@@ -50,8 +50,21 @@ export const getFights = async () => {
   
 // Get all events
 export const getEvents = async () => {
-    const response = await api.get('/events');
-    return response.data;
+    try {
+        const response = await api.get('/events', {
+            params:
+            {
+                skip: skip,
+                limit: limit,
+                sort: sort,
+                order: order
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching events:', error);
+        throw error;
+    }
 };
 
 // Function to fetch Elo records by fighter name

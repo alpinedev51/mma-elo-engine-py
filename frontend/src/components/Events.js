@@ -23,53 +23,53 @@ const Events = () => {
     return (
         <div className="events-list">
             <h2>Retrieve Events</h2>
+            <div className="event-options">
+                <div className="events-options-input-group">
+                    <label>Skip:</label>
+                    <input
+                        type="number"
+                        id="skip"
+                        value={skip}
+                        onChange={(e) => setSkip(Number(e.target.value))}
+                        min="0"
+                    />
+                </div>
 
-            <div className="events-list-input-group">
-                <label>Skip:</label>
-                <input
-                    type="number"
-                    id="skip"
-                    value={skip}
-                    onChange={(e) => setSkip(Number(e.target.value))}
-                    min="0"
-                />
+                <div className="events-options-input-group">
+                    <label>Limit:</label>
+                    <input
+                        type="number"
+                        id="limit"
+                        value={limit}
+                        onChange={(e) => setLimit(Number(e.target.value))}
+                        min="0"
+                    />
+                </div>
+
+                <div className="events-options-input-group">
+                    <label>Sort By:</label>
+                    <select
+                        id="sort"
+                        value={sort}
+                        onChange={(e) => setSort(e.target.value)}
+                    >
+                        <option value="event_date">Event Date</option>
+                        <option value="event_name">Event Name</option>
+                    </select>
+                </div>
+
+                <div className="events-options-input-group">
+                    <label>Order By:</label>
+                    <select
+                        id="order"
+                        value={order}
+                        onChange={(e) => setOrder(e.target.value)}
+                    >
+                        <option value="desc">Descending (Latest to Oldest)</option>
+                        <option value="asc">Ascending (Oldest to Latest)</option>
+                    </select>
+                </div>
             </div>
-
-            <div className="events-list-input-group">
-                <label>Limit:</label>
-                <input
-                    type="number"
-                    id="limit"
-                    value={limit}
-                    onChange={(e) => setLimit(Number(e.target.value))}
-                    min="0"
-                />
-            </div>
-
-            <div className="events-list-input-group">
-                <label>Sort By:</label>
-                <select
-                    id="sort"
-                    value={sort}
-                    onChange={(e) => setSort(e.target.value)}
-                >
-                    <option value="event_date">Event Date</option>
-                    <option value="event_name">Event Name</option>
-                </select>
-            </div>
-
-            <div className="events-list-input-group">
-                <label>Order By:</label>
-                <select
-                    id="order"
-                    value={order}
-                    onChange={(e) => setOrder(e.target.value)}
-                >
-                    <option value="desc">Descending (Latest to Oldest)</option>
-                    <option value="asc">Ascending (Oldest to Latest)</option>
-                </select>
-            </div>
-
             <button className="search-button" onClick={handleSearch}>
                 Retrieve Events
             </button>

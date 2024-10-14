@@ -1,7 +1,9 @@
 # MMA Elo Engine
 
-#### Updates
+## Updates
+
 [10/11/2024]
+
 - Only supports UFC fights as of now.
 - Scraping is working (Scrapy).
 - Data is updated and stored in PostgreSQL database (locally as of now, still working on deployment to vps or cloud container service).
@@ -11,11 +13,12 @@
 - Currently working on implementing the backend in Rust.
 
 ## Introduction
+
 The MMA Elo Engine is a tool designed to help answer the age-old question: "Who is the best fighter?" In the world of mixed martial arts (MMA), rankings can often be subjective and hotly debated. This project leverages the Elo rating system, traditionally used in chess, to evaluate fighters' performance based on head-to-head contests. By scraping data from various MMA organizations, we calculate Elo scores that provide a quantifiable measure of a fighter's skill level. This engine aids in ranking fighters and also fuels discussions about their abilities, making the conversation about "the best" more data-driven and insightful. This engine also utilizes fast methods in scraping, storing, and processing data that scale well, providing an effective framework to build off of for Elo ranking systems for other competitive endeavors such as tennis, BJJ, 1v1 esports, fencing, etc.
 
 ## Understanding Elo Ratings
 
-#### What is Elo?
+### What is Elo?
 
 Elo is a rating system used to calculate the relative skill levels of players in two-player games such as chess, and in some cases, in combat sports like MMA. It provides a way to rank competitors based on their performance against one another.
 
@@ -92,17 +95,21 @@ flowchart TD
 ## Technical Overview
 
 ### Technology Stack
+
 - **Database**: PostgreSQL is used to store fighter data, fight results, and calculated Elo scores.
 - **Web Scraping**: We utilize the fast Python scraping framework Scrapy to gather statistics.
 - **API Development**: FastAPI is employed to create a high-performance API.
 
 ### Architecture
+
 The project is structured in a modular fashion:
+
 1. **Data Collection**: A web scraper fetches and stores fighter statistics and fight results in the database.
 2. **Elo Calculation**: An Elo calculation module processes fight results and updates fighter ratings accordingly.
 3. **API Layer**: The FastAPI application serves as an interface for users to query fighters and their Elo scores, facilitating easy access to data.
 
 ### Goals / Future Features
+
 - **Dynamic Data Sources**: Integrate data from various MMA promotions, providing a more comprehensive view of a fighter's performance.
 - **Real-Time Updates**: As fights occur, automatically update fighter ratings, ensuring that users always have access to the most current data.
 
@@ -127,5 +134,7 @@ The data flow in this project can be summarized as follows:
    - Accessing event details.
 
 ## References
-### Inspired by:
+
+### Inspired by
+
 [UFC-Elo-Engine](https://github.com/NBAtrev/UFC-Elo-Engine) created by Trevor Hicks.

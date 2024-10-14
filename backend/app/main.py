@@ -3,7 +3,7 @@ from . import crud
 from . import schemas
 from sqlalchemy.orm import Session
 from typing import List
-from .database import init_db, get_db
+from .database import get_db
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -19,7 +19,7 @@ app.add_middleware(
 
 @app.get("/health")
 def health_check():
-    return {"status": "ok :D"}
+    return {"status": "ok"}
 
 @app.get("/")
 async def root():

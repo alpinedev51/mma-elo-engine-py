@@ -17,20 +17,43 @@ def get_fighter_by_id(db: Session, fighter_id: int):
     return db.query(Fighter).filter(Fighter.id == fighter_id).first()
 
 # /fighters/
-def get_fighters(db: Session, skip: int = 0, limit: int = 10):
-    return db.query(Fighter).offset(skip).limit(limit).all()
+def get_fighters(db: Session, skip: int = 0, limit: int = 10, sort: str = 'elo_rating', order: str = 'desc'):
+    query = db.query(Fighter).offset(skip).limit(limit)
+    if sort == 'elo_rating':
+        if order == 'asc':
+            query = query.order_by(asc(Fighter.elo_rating))
+        elif order == 'desc':
+            query = query.order_by(desc(Fighter.elo_rating))
+    elif sort == 'fighter_name':
+        if order == 'asc':
+            query = query.order_by(asc(Fighter.fighter_name))
+        elif order == 'desc':
+            query = query.order_by(desc(Fighter.fighter_name))
+    return query.all()
 
 # /events/search
-def get_event_by_name(db: Session, event_name: str):
-    return db.query(Event).filter(Event.event_name.ilike(f"%{event_name}%")).all()
+def get_event_by_name(db: Session, event_name: str, sort: str = 'event_date', order: str = 'desc'):
+    query = db.query(Event).filter(Event.event_name.ilike(f"%{event_name}%"))
+    if sort == 'event_date':
+        if order == 'asc':
+            query = query.order_by(asc(Event.event_date))
+        elif order == 'desc':
+            query = query.order_by(desc(Event.event_date))
+    return query.all()
 
 # /events/{event_id}
 def get_event_by_id(db: Session, event_id: int):
     return db.query(Event).filter(Event.id == event_id).first()
 
 # /events/
-def get_events(db: Session, skip: int = 0, limit: int = 10):
-    return db.query(Event).offset(skip).limit(limit).all()
+def get_events(db: Session, skip: int = 0, limit: int = 10, sort: str = 'event_date', order: str = 'desc'):
+    query = db.query(Event).offset(skip).limit(limit)
+    if sort == 'event_date':
+        if order == 'asc':
+            query = query.order_by(asc(Event.event_date))
+        elif order == 'desc':
+            query = query.order_by(desc(Event.event_date))
+    return query.all()
 
 # /fights/search
 def get_fights_with_fighter(db: Session, fighter_name: str):

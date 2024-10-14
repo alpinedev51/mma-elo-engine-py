@@ -4,13 +4,13 @@
 
 [10/11/2024]
 
+
 - Only supports UFC fights as of now.
-- Scraping is working (Scrapy).
-- Data is updated and stored in PostgreSQL database (locally as of now, still working on deployment to vps or cloud container service).
-- Elo engine is working.
-- Upated schema to have a separate table for Elo history.
-- Created functions in database for quicker access to fighter Elo history.
-- Currently working on implementing the backend in Rust.
+- Full stack is fully functional from end to end.
+- Frontend is WIP only supporting Elo records and fighter searches.
+- Polish CRUD and API endpoints.
+- Create scheduler for automated scraping and elo engine update workflow.
+- Currently very slowly working on implementing the backend in Rust.
 
 ## Introduction
 

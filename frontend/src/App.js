@@ -2,8 +2,8 @@ import React from 'react';
 import Fighter from './components/Fighter';
 import EloRecordsByFighter from './components/EloRecordsByFighter';
 import Events from './components/Events';
-import './App.css';
-import './Stats.css';
+import './style/App.css';
+import './style/Stats.css';
 
 const Sidebar = () => {
     return (

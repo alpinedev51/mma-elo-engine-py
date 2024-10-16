@@ -105,6 +105,7 @@
 }
   
 .search-button {
+    margin-left: 2px;
     padding: 2px 7px;
     border: 1px solid #aaaaaa;
     border-radius: 5px;

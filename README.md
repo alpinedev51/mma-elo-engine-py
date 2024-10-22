@@ -100,8 +100,8 @@ flowchart TD
 - **Web Scraping**: Utilizes the fast Python scraping framework [Scrapy](https://scrapy.org/) to gather data.
 - **Elo Engine**: Elo engine Python package calculates Elo statistics and updates Elo ratings and history in database.
 - **API Development**: FastAPI is employed to create a high-performance API.
-- [**Node.js**](https://nodejs.org/en): Frontend package manager and runtime environment.
-- [**React.js**](https://react.dev/): Frontend web development framework.
+- **Frontend**: [Node.js](https://nodejs.org/en) for the frontend package manager and runtime environment.
+- **Web Development Framework**: [React.js](https://react.dev/) for frontend web development framework.
 
 ### Architecture
 

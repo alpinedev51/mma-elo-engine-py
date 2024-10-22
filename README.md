@@ -108,7 +108,7 @@ flowchart TD
 The project is structured in a very simple full stack fashion:
 
 1. **Database**: Stores and handles the data.
-2. **Backend**: Houses the web scraper, Elo enginer package, CRUD operations, and API endpoints.
+2. **Backend**: Houses the web scraper, Elo engine package, CRUD operations, and API endpoints.
 3. **Frontend**: Used for access backend API endpoints and providing a user interface.
 
 ### Goals / Future Features

@@ -2,7 +2,7 @@
 
 ## Updates
 
-[10/11/2024]
+[10/22/2024]
 
 
 - Only supports UFC fights as of now.

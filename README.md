@@ -97,16 +97,19 @@ flowchart TD
 ### Technology Stack
 
 - **Database**: PostgreSQL is used to store fighter data, fight results, and calculated Elo scores.
-- **Web Scraping**: We utilize the fast Python scraping framework Scrapy to gather statistics.
+- **Web Scraping**: Utilizes the fast Python scraping framework [Scrapy](https://scrapy.org/) to gather data.
+- **Elo Engine**: Elo engine Python package calculates Elo statistics and updates Elo ratings and history in database.
 - **API Development**: FastAPI is employed to create a high-performance API.
+- [**Node.js**](https://nodejs.org/en): Frontend package manager and runtime environment.
+- [**React.js**](https://react.dev/): Frontend web development framework.
 
 ### Architecture
 
-The project is structured in a modular fashion:
+The project is structured in a very simple full stack fashion:
 
-1. **Data Collection**: A web scraper fetches and stores fighter statistics and fight results in the database.
-2. **Elo Calculation**: An Elo calculation module processes fight results and updates fighter ratings accordingly.
-3. **API Layer**: The FastAPI application serves as an interface for users to query fighters and their Elo scores, facilitating easy access to data.
+1. **Database**: Stores and handles the data.
+2. **Backend**: Houses the web scraper, Elo enginer package, CRUD operations, and API endpoints.
+3. **Frontend**: Used for access backend API endpoints and providing a user interface.
 
 ### Goals / Future Features
 

@@ -73,7 +73,7 @@ flowchart TD
     end
 
     subgraph Frontend
-        E1[React Website] --> D1
+        E1[React Website w/ Interactive Charts and Graphs] --> D1
         click E1 "Data is displayed on a React-based frontend."
     end
 

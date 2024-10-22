@@ -96,10 +96,10 @@ flowchart TD
 
 ### Technology Stack
 
-- **Database**: PostgreSQL is used to store fighter data, fight results, and calculated Elo scores.
+- **Database**: [PostgreSQL](https://www.postgresql.org/) is used to store fighter data, fight results, and calculated Elo scores.
 - **Web Scraping**: Utilizes the fast Python scraping framework [Scrapy](https://scrapy.org/) to gather data.
 - **Elo Engine**: Elo engine Python package calculates Elo statistics and updates Elo ratings and history in database.
-- **API Development**: FastAPI is employed to create a high-performance API.
+- **API Development**: [FastAPI](https://fastapi.tiangolo.com/) is employed to create a high-performance API.
 - **Frontend**: [Node.js](https://nodejs.org/en) for the frontend package manager and runtime environment.
 - **Web Development Framework**: [React.js](https://react.dev/) for frontend web development framework.
 

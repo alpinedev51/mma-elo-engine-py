@@ -6,11 +6,10 @@
 
 
 - Only supports UFC fights as of now.
-- Full stack is fully functional from end to end.
+- Full stack from end to end functionality. Only GET API endpoints supported right now.
 - Frontend is WIP only supporting Elo records and fighter searches.
-- Polish CRUD and API endpoints.
 - Create scheduler for automated scraping and elo engine update workflow.
-- Currently very slowly working on implementing the backend in Rust.
+- Goal: Re-do the backend in Rust with this same basic functionality.
 
 ## Introduction
 

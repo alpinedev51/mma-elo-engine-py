@@ -35,6 +35,6 @@ def get_k_factor(method: str, k: Union[float, str], multiplier: Union[float, int
         if multiplier_increase <= 0:
             return k * multiplier
         else:
-            return k * (1 + (multiplier_increase * 0.5))
+            return k * (1 + (multiplier_increase * 0.8))
     else:
         return k

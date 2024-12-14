@@ -1,5 +1,7 @@
 # Getting Started with Create React App
 
+*Generic React App Documentation for working with React App*
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

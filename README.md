@@ -136,6 +136,18 @@ The data flow in this project can be summarized as follows:
    - Retrieving Elo history.
    - Accessing event details.
 
+## Build and Deploy
+
+In root directory:
+
+```
+docker compose up
+```
+
+`init_db.sh`: Initializes the database upon initialization of the `db` container.
+`start.sh`: Runs the web crawler and Elo engine inside the `backend` container. This updates the database created in `db`.
+
+
 ## References
 
 ### Inspired by

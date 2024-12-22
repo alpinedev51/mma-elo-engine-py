@@ -1,0 +1,53 @@
+name: Docker Backend Image CI
+
+on:
+  push:
+    branches: [ "main", "austin" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Load environment variables
+      run: |
+        echo "DATABASE_NAME=${{ secrets.DATABASE_NAME }}" >> $GITHUB_ENV
+        echo "DATABASE_USER=${{ secrets.DATABASE_USER }}" >> $GITHUB_ENV
+        echo "DATABASE_PW=${{ secrets.DATABASE_PW }}" >> $GITHUB_ENV
+        echo "DATABASE_PORT=${{ secrets.DATABASE_PORT }}" >> $GITHUB_ENV
+        echo "DATABASE_HOST=${{ secrets.DATABASE_HOST }}" >> $GITHUB_ENV
+
+    - name: Build the Docker image
+      working-directory: ./backend
+      run: docker build . --file Dockerfile --tag backend:latest
+
+    - name: Run Backend
+      run: |
+        # Start the container in detached mode
+        docker run -d \
+          --env DATABASE_NAME=${{ secrets.DATABASE_NAME }} \
+          --env DATABASE_USER=${{ secrets.DATABASE_USER }} \
+          --env DATABASE_PW=${{ secrets.DATABASE_PW }} \
+          --name backend_container \
+          -p 5050:5050 \
+          backend:latest
+    
+    - name: List Running Containers
+      run: docker ps -a
+
+    - name: Check Backend Logs
+      run: |
+        CONTAINER_ID=$(docker ps -aq --filter "ancestor=backend:latest")
+        if [ -n "$CONTAINER_ID" ]; then
+          docker logs "$CONTAINER_ID" || echo "No logs available."
+        else
+          echo "No backend container running."
+        fi
+        

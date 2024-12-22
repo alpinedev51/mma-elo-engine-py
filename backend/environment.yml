@@ -1,0 +1,27 @@
+name: mma_elo_engine
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.10
+  - numpy
+  - matplotlib
+  - pip
+  - beautifulsoup4
+  - seaborn
+  - pandas
+  - requests
+  - ipykernel
+  - plotly=5.24.1
+  - nbformat>=4.2.0
+  - numexpr
+  - bottleneck
+  - python-kaleido
+  - fastapi
+  - uvicorn
+  - SQLAlchemy
+  - psycopg2-binary
+  - psycopg2
+  - python-dotenv
+  - Scrapy
+  - lxml=5.3.0 # 5.2 is installed by default but doesn't work

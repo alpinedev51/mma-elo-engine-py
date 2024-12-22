@@ -1,0 +1,12 @@
+# Ignore environment config
+.env
+
+# Ignore Python cache directories
+__pycache__/
+
+# Ignore other files and directories
+*.pyc
+*.pyo
+*.pyd
+
+app/mma_scraper/scrapy.log

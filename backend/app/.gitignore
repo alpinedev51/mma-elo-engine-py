@@ -1,0 +1,12 @@
+/.env
+/scrapy.log
+# Ignore Python cache directories
+__pycache__/
+
+# Ignore other files and directories
+*.pyc
+*.pyo
+*.pyd
+
+create_database.py
+init_db.py

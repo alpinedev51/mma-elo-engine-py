@@ -40,7 +40,6 @@ services:
     container_name: frontend_service
     ports:
       - "3000:80"
-    network_mode: "host"
     depends_on:
       - backend
 

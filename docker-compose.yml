@@ -28,10 +28,21 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      DATABASE_URL: ${DATABASE_URL}
       DATABASE_HOST: db
       DATABASE_PORT: 5432
     ports:
       - "5050:5050"
+  
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend_service
+    ports:
+      - "3000:80"
+    network_mode: "host"
+    depends_on:
+      - backend
 
 volumes:
   postgres_data:

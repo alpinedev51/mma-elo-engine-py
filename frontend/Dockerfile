@@ -2,6 +2,8 @@ FROM node:23-alpine AS build
 
 WORKDIR /app
 
+RUN npm cache clean --force
+
 COPY package.json package-lock.json ./
 
 RUN npm install -g npm@latest

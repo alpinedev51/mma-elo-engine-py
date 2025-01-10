@@ -13,9 +13,11 @@ def get_db():
     finally:
         db.close()
 
-@router.get("api/fighters/search", response_model=List[schemas.FighterResponse], status_code=status.HTTP_200_OK)
+@router.get("/api/fighters/search", response_model=schemas.FightersListResponse, status_code=status.HTTP_200_OK)
 def search_fighter_by_name(
-        fighter_name: str, 
+        fighter_name: str,
+        skip: int = 0,
+        limit: int =10,
         sort: str = 'elo_rating', 
         order: str = "desc", 
         db: Session = Depends(get_db)
@@ -26,9 +28,21 @@ def search_fighter_by_name(
     fighters = crud_result["data"]
     if not fighters:
         raise HTTPException(status_code=404, detail=f"Fighter with name {fighter_name} not found")
-    return crud_result
+    total_count = crud_result["total_count"]
+    pagination = {
+        "total_count": total_count,
+        "page": (skip // limit) + 1,
+        "per_page": limit,
+        "pages": (total_count + limit - 1) // limit
+    }
 
-@router.get("api/fighters/{fighter_id}", response_model=schemas.FighterResponse, status_code=status.HTTP_200_OK)
+    return {
+        "data": fighters,
+        "total_count": total_count,
+        "pagination": pagination
+    }
+
+@router.get("/api/fighters/{fighter_id}", response_model=schemas.FighterResponse, status_code=status.HTTP_200_OK)
 def read_fighter_by_id(fighter_id: int, db: Session = Depends(get_db)):
     fighter = crud.get_fighter_by_id(db, fighter_id)
     if fighter is None:
@@ -38,7 +52,7 @@ def read_fighter_by_id(fighter_id: int, db: Session = Depends(get_db)):
         )
     return fighter
 
-@router.get("api/fighters/", response_model=List[schemas.FighterResponse], status_code=status.HTTP_200_OK)
+@router.get("/api/fighters/", response_model=schemas.FightersListResponse, status_code=status.HTTP_200_OK)
 def read_fighters(
         skip: int = 0, 
         limit: int = 10, 
@@ -55,7 +69,7 @@ def read_fighters(
         "total_count": total_count,
         "page": (skip // limit) + 1,
         "per_page": limit,
-        "pages": (crud_result["total_count"] + limit - 1) // limit
+        "pages": (total_count + limit - 1) // limit
     }
 
     return {

@@ -13,7 +13,7 @@ def get_db():
     finally:
         db.close()
 
-@router.get("api/events/search", response_model=List[schemas.EventResponse], status_code=status.HTTP_200_OK)
+@router.get("/api/events/search", response_model=List[schemas.EventResponse], status_code=status.HTTP_200_OK)
 def search_event_by_name(event_name: str, db: Session = Depends(get_db)):
     if not event_name or event_name.strip() == "":
         return []
@@ -22,14 +22,14 @@ def search_event_by_name(event_name: str, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail=f"Event with name {event_name} not found")
     return events
 
-@router.get("api/events/{event_id}", response_model=schemas.EventResponse, status_code=status.HTTP_200_OK)
+@router.get("/api/events/{event_id}", response_model=schemas.EventResponse, status_code=status.HTTP_200_OK)
 def read_event_by_id(event_id: int, db: Session = Depends(get_db)):
     event = crud.get_event_by_id(db, event_id)
     if event is None:
         raise HTTPException(status_code=404, detail=f"Event with ID {event_id} not found")
     return event
 
-@router.get("api/events/", response_model=List[schemas.EventResponse], status_code=status.HTTP_200_OK)
+@router.get("/api/events/", response_model=List[schemas.EventResponse], status_code=status.HTTP_200_OK)
 def read_events(skip: int = 0, limit: int = 10, sort: str = 'event_date', order: str = 'desc', db: Session = Depends(get_db)):
     events = crud.get_events(db, skip, limit, sort, order)
     if not events:

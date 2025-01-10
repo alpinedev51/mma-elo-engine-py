@@ -1,4 +1,5 @@
 from pydantic import BaseModel, condecimal
+from typing import List
 from datetime import datetime
 
 class FighterBase(BaseModel):
@@ -7,11 +8,20 @@ class FighterBase(BaseModel):
 
 class FighterResponse(FighterBase):
     id: int
-    fighter_name: str
-    elo_rating: float
 
     class Config:
         from_attributes = True
+
+class Pagination(BaseModel):
+    total_count: int
+    page: int
+    per_page: int
+    pages: int
+
+class FightersListResponse(BaseModel):
+    data: List[FighterResponse]
+    total_count: int
+    pagination: Pagination
 
 class EloRecordBase(BaseModel):
     fighter_id: int

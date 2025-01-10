@@ -14,7 +14,7 @@ def get_db():
     finally:
         db.close()
 
-@router.get("api/elo-records/search", response_model=List[schemas.EloRecordByFighterResponse], status_code=status.HTTP_200_OK)
+@router.get("/api/elo-records/search", response_model=List[schemas.EloRecordByFighterResponse], status_code=status.HTTP_200_OK)
 def read_elo_records_by_fighter(fighter_name: str, db: Session = Depends(get_db)):
     if not fighter_name or fighter_name.strip() == "":
         return []

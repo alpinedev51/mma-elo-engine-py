@@ -6,7 +6,7 @@ This repository contains a FastAPI backend that can be run with Uvicorn.
 
 ### Scraping
 
-- Got to `app` directory of backend project.
+- Go to `app` directory of backend project.
 - `scrapy crawl ufc_spider`
 - This will take a while to run.
 

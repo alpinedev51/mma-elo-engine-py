@@ -35,3 +35,4 @@ def read_fights(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
     if not fights:
         raise HTTPException(status_code=404, detail="No fights returned...")
     return fights
+

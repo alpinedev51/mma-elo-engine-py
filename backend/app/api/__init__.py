@@ -4,3 +4,4 @@ from .elo_records import router as elo_records_router
 from .fighters import router as fights_router
 
 __all__ = ["fighters_router", "events_router", "elo_records_router", "fights_router"]
+

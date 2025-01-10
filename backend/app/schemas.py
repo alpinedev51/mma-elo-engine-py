@@ -7,6 +7,8 @@ class FighterBase(BaseModel):
 
 class FighterResponse(FighterBase):
     id: int
+    fighter_name: str
+    elo_rating: float
 
     class Config:
         from_attributes = True
@@ -18,20 +20,20 @@ class EloRecordBase(BaseModel):
 
 class EloRecordResponse(EloRecordBase):
     id: int
-    
+
     class Config:
         from_attributes = True
 
 class EventBase(BaseModel):
     event_name: str
     event_date: datetime
-    
+
 class EventResponse(EventBase):
     id: int
-    
+
     class Config:
         from_attributes = True
-        
+
 class FightBase(BaseModel):
     fighter_1_id: int
     fighter_2_id: int

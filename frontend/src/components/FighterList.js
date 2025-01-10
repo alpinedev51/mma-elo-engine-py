@@ -5,10 +5,14 @@ const FighterList = () => {
     const [fighters, setFighters] = useState([]);
 
     // Fetch the list of fighters from the API
-  useEffect(() => {
-    const fetchFighters = async () => {
-      const fightersData = await getFighters();
-      setFighters(fightersData);
+    useEffect(() => {
+      const fetchFighters = async () => {
+        try {
+          const fightersData = await getFighters();
+          setFighters(fightersData);
+        } catch (error) {
+          console.error("Error fetching fighters:", error);
+        }
     };
     fetchFighters();
   }, []);
@@ -19,7 +23,7 @@ const FighterList = () => {
       <ul>
         {fighters.map(fighter => (
           <li key={fighter.id}>
-            {fighter.name} - Elo: {fighter.elo}
+            {fighter.name} - Elo: {fighter.elo_rating}
           </li>
         ))}
       </ul>

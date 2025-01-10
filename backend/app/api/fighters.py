@@ -13,7 +13,7 @@ def get_db():
     finally:
         db.close()
 
-@router.get("/fighters/search", response_model=List[schemas.FighterResponse], status_code=status.HTTP_200_OK)
+@router.get("api/fighters/search", response_model=List[schemas.FighterResponse], status_code=status.HTTP_200_OK)
 def search_fighter_by_name(
         fighter_name: str, 
         sort: str = 'elo_rating', 
@@ -28,7 +28,7 @@ def search_fighter_by_name(
         raise HTTPException(status_code=404, detail=f"Fighter with name {fighter_name} not found")
     return crud_result
 
-@router.get("/fighters/{fighter_id}", response_model=schemas.FighterResponse, status_code=status.HTTP_200_OK)
+@router.get("api/fighters/{fighter_id}", response_model=schemas.FighterResponse, status_code=status.HTTP_200_OK)
 def read_fighter_by_id(fighter_id: int, db: Session = Depends(get_db)):
     fighter = crud.get_fighter_by_id(db, fighter_id)
     if fighter is None:
@@ -38,11 +38,29 @@ def read_fighter_by_id(fighter_id: int, db: Session = Depends(get_db)):
         )
     return fighter
 
-@router.get("/fighters/", response_model=List[schemas.FighterResponse], status_code=status.HTTP_200_OK)
-def read_fighters(skip: int = 0, limit: int = 10, sort: str = 'elo_rating', order: str = 'desc', db: Session = Depends(get_db)):
+@router.get("api/fighters/", response_model=List[schemas.FighterResponse], status_code=status.HTTP_200_OK)
+def read_fighters(
+        skip: int = 0, 
+        limit: int = 10, 
+        sort: str = 'elo_rating', 
+        order: str = 'desc', 
+        db: Session = Depends(get_db)
+):
     crud_result = crud.get_fighters(db, skip=skip, limit=limit, sort=sort, order=order)
     fighters = crud_result["data"]
     if not fighters:
         raise HTTPException(status_code=404, detail="No fighters returned...")
-    return crud_result
+    total_count = crud_result["total_count"]
+    pagination = {
+        "total_count": total_count,
+        "page": (skip // limit) + 1,
+        "per_page": limit,
+        "pages": (crud_result["total_count"] + limit - 1) // limit
+    }
+
+    return {
+        "data": fighters,
+        "total_count": total_count,
+        "pagination": pagination
+    }
 

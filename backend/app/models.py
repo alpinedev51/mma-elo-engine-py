@@ -60,3 +60,4 @@ class Fight(Base):
     
     def __repr__(self):
         return f"<Fight(fighter_1_id={self.fighter_1_id}, fighter_2_id={self.fighter_2_id}, result={self.result}, method={self.method})>"
+

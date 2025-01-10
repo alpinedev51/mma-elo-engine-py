@@ -24,3 +24,4 @@ app.include_router(fighters_router)
 app.include_router(events_router)
 app.include_router(elo_records_router)
 app.include_router(fights_router)
+

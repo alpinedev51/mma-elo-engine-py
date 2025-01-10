@@ -1,35 +1,74 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import text, asc, desc
 from .models import Fighter, Fight, Event
+from fastapi import HTTPException
 
+sortable_fields = {
+    'elo_rating': Fighter.elo_rating,
+    'fighter_name': Fighter.fighter_name,
+    'id': Fighter.id,
+}
+
+'''
+optimizing the search query:
+- currently uses ilike which does a full table scan
+- for larger datasets, it's better to do a full-rext search
+- query = db.query(Fighter).filter(func.to_tsvector(Fighter.fighter_name).match(fighter_name))
+'''
 # /fighters/search
-def get_fighter_by_name(db: Session, fighter_name: str, sort: str = 'elo_rating', order: str = 'desc'):
+def get_fighter_by_name(
+        db: Session, 
+        fighter_name: str, 
+        sort: str = 'elo_rating', 
+        order: str = 'desc', 
+        skip: int = 0, 
+        limit: int = 10
+):
+    if sort not in sortable_fields:
+        sort = 'elo_rating'
     query = db.query(Fighter).filter(Fighter.fighter_name.ilike(f"%{fighter_name}%"))
-    if sort == 'elo_rating':
-        if order == 'asc':
-            query = query.order_by(asc(Fighter.elo_rating))
-        elif order == 'desc':
-            query = query.order_by(desc(Fighter.elo_rating))
-    return query.all()
+    field = sortable_fields[sort]
+    if order == 'asc':
+        query = query.order_by(asc(field))
+    elif order == 'desc':
+        query = query.order_by(desc(field))
+
+    total_count = query.count()
+    query = query.offset(skip).limit(limit)
+    results = query.all()
+    return {"data": results, "total_count": total_count}
 
 # /fighters/{fighter_id}
 def get_fighter_by_id(db: Session, fighter_id: int):
     return db.query(Fighter).filter(Fighter.id == fighter_id).first()
 
 # /fighters/
-def get_fighters(db: Session, skip: int = 0, limit: int = 10, sort: str = 'elo_rating', order: str = 'desc'):
+def get_fighters(
+        db: Session, 
+        skip: int = 0, 
+        limit: int = 10, 
+        sort: str = 'elo_rating', 
+        order: str = 'desc'
+):
+    if sort not in sortable_fields:
+        raise HTTPException(status_code=400, detail="Invalid sort field")
+    if order not in ['asc', 'desc']:
+        raise HTTPException(status_code=400, detail="Order must be asc or desc")
     query = db.query(Fighter)
-    if sort == 'elo_rating':
-        if order == 'asc':
-            query = query.order_by(asc(Fighter.elo_rating))
-        elif order == 'desc':
-            query = query.order_by(desc(Fighter.elo_rating))
-    elif sort == 'fighter_name':
-        if order == 'asc':
-            query = query.order_by(asc(Fighter.fighter_name))
-        elif order == 'desc':
-            query = query.order_by(desc(Fighter.fighter_name))
-    return query.offset(skip).limit(limit).all()
+    field = sortable_fields[sort]
+    if order == 'asc':
+        query = query.order_by(asc(field))
+    elif order == 'desc':
+        query = query.order_by(desc(field))
+    total_count = query.count()
+    fighters = query.offset(skip).limit(limit).all()
+    page = skip // limit + 1
+    return {
+        "data": fighters,
+        "total_count": total_count,
+        "page": page,
+        "per_page": limit
+    }
 
 # /events/search
 def get_event_by_name(db: Session, event_name: str, sort: str = 'event_date', order: str = 'desc'):
@@ -88,3 +127,4 @@ def get_elo_records_by_fighter(db: Session, fighter_name: str):
     records = result.fetchall()
     elo_records = [row._mapping for row in records]
     return elo_records if elo_records else None
+

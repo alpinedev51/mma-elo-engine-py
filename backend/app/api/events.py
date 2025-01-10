@@ -35,3 +35,4 @@ def read_events(skip: int = 0, limit: int = 10, sort: str = 'event_date', order:
     if not events:
         raise HTTPException(status_code=404, detail=f"Events not returned...")
     return events
+

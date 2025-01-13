@@ -17,12 +17,12 @@ optimizing the search query:
 '''
 # /fighters/search
 def get_fighter_by_name(
-        db: Session, 
-        fighter_name: str, 
-        sort: str = 'elo_rating', 
-        order: str = 'desc', 
-        skip: int = 0, 
-        limit: int = 10
+        db: Session,
+        fighter_name: str,
+        skip: int = 0,
+        limit: int = 10,
+        sort: str = 'elo_rating',
+        order: str = 'desc'
 ):
     if sort not in sortable_fields:
         sort = 'elo_rating'

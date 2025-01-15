@@ -2,15 +2,12 @@
 
 ## Updates
 
-[10/23/2024]
-
+[01/05/2025]
 
 - Only supports UFC fights as of now.
 - Only GET API endpoints supported right now.
 - Frontend is WIP only supporting Elo records and fighter searches.
-- TODO: Create scheduler for automated scraping and elo engine update workflow.
-- TODO: Interactive graphs and tables created by user.
-- GOAL: Re-do the backend in Rust with this same basic functionality.
+- TODO: See Issues
 
 ## Introduction
 

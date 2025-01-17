@@ -24,7 +24,7 @@ def search_fighter_by_name(
 ):
     if not fighter_name or fighter_name.strip() == "":
         return []
-    crud_result = crud.get_fighter_by_name(db, fighter_name.strip(), sort, order)
+    crud_result = crud.get_fighter_by_name(db, fighter_name.strip(), skip, limit, sort, order)
     fighters = crud_result["data"]
     if not fighters:
         raise HTTPException(status_code=404, detail=f"Fighter with name {fighter_name} not found")

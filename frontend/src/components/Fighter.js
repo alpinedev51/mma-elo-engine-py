@@ -10,8 +10,9 @@ const Fighter = () => {
         setError('');
         setFighter([]);
         try {
-            const records = await getFightersByName(fighterName, 'elo_rating', 'desc');
+            const records = await getFightersByName(fighterName, 0, 10, 'elo_rating', 'desc');
             setFighter(records);
+            console.log(records);
         } catch (err) {
             setError('No fighters returned.');
         }

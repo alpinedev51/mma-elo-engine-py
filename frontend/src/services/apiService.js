@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Set up base URL for API
 const api = axios.create({
-    baseURL: 'http://backend:5050'
+    baseURL: 'http://localhost:5050'
 });
 
 // Get all fighters
@@ -24,17 +24,20 @@ export const getFighters = async (skip, limit, sort, order) => {
     }
 };
 
-// Function to fetch Elo records by fighter name
-export const getFightersByName = async (fighterName, sort, order) => {
+// Function to fetch current Elo record by fighter name
+export const getFightersByName = async (fighterName, skip, limit, sort, order) => {
     try {
         const response = await api.get('api/fighters/search', {
             params: 
             { 
                 fighter_name: fighterName,
+                skip: skip,
+                limit: limit,
                 sort: sort,
                 order: order
             }
         });
+        console.log("returning response data in component");
         return response.data;
     } catch (error) {
         console.error('Error fetching fighter records:', error);

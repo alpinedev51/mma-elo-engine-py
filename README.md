@@ -70,7 +70,6 @@ flowchart TD
 
     subgraph Database
         B1[(PostgreSQL Database)] --> A3
-        B1 --> A4
         click B1 "PostgreSQL database stores and handles fighter data and Elo scores."
     end
 
@@ -88,8 +87,7 @@ flowchart TD
 
     class A1,A2 blue;
     class B1 green;
-    class C1 orange;
-    class D1 purple;
+    class A3,A4 purple;
     class E1 lightgreen;
 ```
 

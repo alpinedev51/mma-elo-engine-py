@@ -69,7 +69,7 @@ flowchart TD
     end
 
     subgraph Database
-        B1[(PostgreSQL Database)] --> A3
+        B1[(PostgreSQL Database)]
         click B1 "PostgreSQL database stores and handles fighter data and Elo scores."
     end
 

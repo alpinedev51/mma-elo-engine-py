@@ -142,9 +142,3 @@ docker compose up
 ```
 
 If this is first time building and deploying, then you need to web scrape and run the Elo calculator. After the first time, this data is cached by docker, even after pruning the system and removing images. See `backend/README.md` for information on scraping and Elo score updating.
-
-## References
-
-### Inspired by
-
-[UFC-Elo-Engine](https://github.com/NBAtrev/UFC-Elo-Engine) created by Trevor Hicks.

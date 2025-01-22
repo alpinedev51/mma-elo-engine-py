@@ -37,7 +37,6 @@ export const getFightersByName = async (fighterName, skip, limit, sort, order) =
                 order: order
             }
         });
-        console.log("returning response data in component");
         return response.data;
     } catch (error) {
         console.error('Error fetching fighter records:', error);

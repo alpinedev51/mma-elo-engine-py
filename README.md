@@ -78,6 +78,8 @@ flowchart TD
         click E1 "Data is displayed in a React-based frontend."
     end
 
+    A2 --> B1
+
     classDef blue fill:#B3E5FC,stroke:#0288D1,stroke-width:2px;
     classDef green fill:#C8E6C9,stroke:#388E3C,stroke-width:2px;
     classDef orange fill:#FFE0B2,stroke:#F57C00,stroke-width:2px;

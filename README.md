@@ -59,9 +59,8 @@ flowchart TD
     subgraph Backend
         A1[Scrapy Spiders] --> W1
         W1 --> A2[Item Pipelines]
-        A2 --> B1
-        A3[Elo Engine] --> B1
-        A4[API Endpoints] --> B1
+        A3[Elo Engine]
+        A4[API Endpoints]
         click A1 "Scrapy Spiders regularly crawl MMA websites for fighter data."
         click A2 "Pipelines process and store the fighter data into the database."
         click A3 "Elo engine processes data in database and updates Elo scores."

@@ -57,7 +57,6 @@ flowchart TD
     end
 
     subgraph Backend
-        direction LR
         A1[Scrapy Spiders] --> W1
         W1 --> A2[Item Pipelines]
         A3[Elo Engine]

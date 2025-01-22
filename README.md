@@ -57,6 +57,7 @@ flowchart TD
     end
 
     subgraph Backend
+        direction LR
         A1[Scrapy Spiders] --> W1
         W1 --> A2[Item Pipelines]
         A3[Elo Engine]
@@ -95,7 +96,7 @@ flowchart TD
     class B1 green;
     class A3 orange;
     class A4 purple;
-    class E1 lightgreen;
+    class E1 yellow;
 ```
 
 ## Technical Overview

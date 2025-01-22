@@ -75,7 +75,7 @@ flowchart TD
     end
 
     subgraph Frontend
-        E1[React Website w/ Interactive Charts and Graphs] --> D1
+        E1[React Website w/ Interactive Charts and Graphs] --> A4
         click E1 "Provides UI for interacting with Backend API."
         click E1 "Data is displayed in a React-based frontend."
     end

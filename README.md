@@ -87,10 +87,14 @@ flowchart TD
     classDef orange fill:#FFE0B2,stroke:#F57C00,stroke-width:2px;
     classDef purple fill:#E1BEE7,stroke:#8E24AA,stroke-width:2px;
     classDef lightgreen fill:#DCEDC8,stroke:#689F38,stroke-width:2px;
+    classDef red fill:#FFCDD2,stroke:#F44336,stroke-width:2px;
+    classDef yellow fill:#FFF9C4,stroke:#FFEB3B,stroke-width:2px;
 
-    class A1,A2 blue;
+    class A1 red;
+    class A2 blue;
     class B1 green;
-    class A3,A4 purple;
+    class A3 orange;
+    class A4 purple;
     class E1 lightgreen;
 ```
 

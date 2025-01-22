@@ -59,22 +59,26 @@ flowchart TD
     subgraph Backend
         A1[Scrapy Spiders] --> W1
         W1 --> A2[Item Pipelines]
+        A2 --> B1
+        A3[Elo Engine] --> B1
+        A4[API Endpoints] --> B1
         click A1 "Scrapy Spiders regularly crawl MMA websites for fighter data."
         click A2 "Pipelines process and store the fighter data into the database."
-        B1[(PostgreSQL Database)] --> C1[Initial Elo Calculation + Weekly Updates]
-        C1 --> B1
-        D1[API Endpoints] --> B1
-        click B1 "PostgreSQL database houses fighter data and Elo scores."
-        click C1 "A weekly job calculates and updates Elo ratings."
-        click D1 "APIs provide access to stored data."
+        click A3 "Elo engine processes data in database and updates Elo scores."
+        click A4 "APIs provide access to database via CRUD operations."
+    end
+
+    subgraph Database
+        B1[(PostgreSQL Database)] --> A3
+        B1 --> A4
+        click B1 "PostgreSQL database stores and handles fighter data and Elo scores."
     end
 
     subgraph Frontend
         E1[React Website w/ Interactive Charts and Graphs] --> D1
-        click E1 "Data is displayed on a React-based frontend."
+        click E1 "Provides UI for interacting with Backend API."
+        click E1 "Data is displayed in a React-based frontend."
     end
-
-    A2 --> B1
 
     classDef blue fill:#B3E5FC,stroke:#0288D1,stroke-width:2px;
     classDef green fill:#C8E6C9,stroke:#388E3C,stroke-width:2px;

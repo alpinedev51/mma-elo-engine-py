@@ -28,8 +28,8 @@ export const getFighters = async (skip, limit, sort, order) => {
 export const getFightersByName = async (fighterName, skip, limit, sort, order) => {
     try {
         const response = await api.get('api/fighters/search', {
-            params: 
-            { 
+            params:
+            {
                 fighter_name: fighterName,
                 skip: skip,
                 limit: limit,
@@ -43,13 +43,13 @@ export const getFightersByName = async (fighterName, skip, limit, sort, order) =
         throw error;
     }
 };
-  
-  // Get all fights
+
+// Get all fights
 export const getFights = async () => {
     const response = await api.get('api/fights');
     return response.data;
 };
-  
+
 // Get all events
 export const getEvents = async (skip, limit, sort, order) => {
     try {
@@ -70,14 +70,13 @@ export const getEvents = async (skip, limit, sort, order) => {
 };
 
 // Function to fetch Elo records by fighter name
-export const getEloRecordsByFighter = async (fighterName, sort, order) => {
+export const getEloRecordsByFighter = async (fighterName, sort) => {
     try {
         const response = await api.get('api/elo-records/search', {
-            params: 
-            { 
+            params:
+            {
                 fighter_name: fighterName,
                 sort: sort,
-                order: order
             }
         });
         return response.data;

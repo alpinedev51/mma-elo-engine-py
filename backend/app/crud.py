@@ -115,13 +115,12 @@ def get_fights(db: Session, skip: int = 0, limit: int = 10):
     return db.query(Fight).offset(skip).limit(limit).all()
 
 # /elo-records/search
-def get_elo_records_by_fighter(db: Session, fighter_name: str):
+def get_elo_records_by_fighter(db: Session, fighter_name: str, sort: str = 'asc'):
     result = db.execute(
-        text("SELECT * FROM get_elo_records_by_fighter(:fighter_name_arg, :sort_column_arg, :sort_order_arg)"),
+        text("SELECT * FROM get_elo_records_by_fighter(:fighter_name_arg, :sort_order_arg)"),
         {
             "fighter_name_arg": fighter_name,
-            "sort_column_arg": "elo_rating",
-            "sort_order_arg": "desc"
+            "sort_order_arg": sort
         }
     )
     records = result.fetchall()

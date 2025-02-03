@@ -15,10 +15,13 @@ def get_db():
         db.close()
 
 @router.get("/api/elo-records/search", response_model=List[schemas.EloRecordByFighterResponse], status_code=status.HTTP_200_OK)
-def read_elo_records_by_fighter(fighter_name: str, db: Session = Depends(get_db)):
+def read_elo_records_by_fighter(
+        fighter_name: str,
+        sort: str = 'asc',
+        db: Session = Depends(get_db)):
     if not fighter_name or fighter_name.strip() == "":
         return []
-    elo_records = crud.get_elo_records_by_fighter(db, fighter_name.strip())
+    elo_records = crud.get_elo_records_by_fighter(db, fighter_name.strip(), 'desc')
     if not elo_records:
         raise HTTPException(status_code=404, detail="No Elo records returned...")
     return elo_records

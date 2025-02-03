@@ -17,7 +17,7 @@ def get_db():
 def search_fighter_by_name(
         fighter_name: str,
         skip: int = 0,
-        limit: int =10,
+        limit: int = 10,
         sort: str = 'elo_rating', 
         order: str = "desc", 
         db: Session = Depends(get_db)

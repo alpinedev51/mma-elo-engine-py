@@ -46,7 +46,7 @@ const EloRecordsByFighter = () => {
                 <ul>
                     {eloRecords.map(record => (
                         <li key={record.fight}>
-                            <strong>{record.fighter_name}</strong>: Elo Rating - {parseFloat(record.elo).toFixed(1)}
+                            <strong>{record.fighter_name}</strong>Elo Rating - {parseFloat(record.elo).toFixed(1)}
                         </li>
                     ))}
                 </ul>

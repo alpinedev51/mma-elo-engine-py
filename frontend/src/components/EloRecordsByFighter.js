@@ -58,7 +58,7 @@ const EloRecordsByFighter = () => {
                     <ResponsiveContainer width="100%" height={300}>
                         <LineChart data={eloRecords}>
                             <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="fight" label={{ value: " Fight Number", position: "insideBottom", offset: -5 }} />
+                            <XAxis dataKey="fight" label={{ value: "Fight Number", position: "insideBottom", offset: -5 }} />
                             <YAxis domain={["auto", "auto"]} label={{ value: "Elo rating", angle: -90, position: "insideLeft" }} />
                             <Line type="monotone" dataKey="elo" stroke="#1D4ED8" strokeWidth={2} dot={{ r: 4 }} />
                         </LineChart>

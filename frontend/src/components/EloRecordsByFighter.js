@@ -14,7 +14,6 @@ const EloRecordsByFighter = () => {
         setLoading(true);
 
         try {
-            setEloRecords(records);
             const records = await getEloRecordsByFighter(fighterName, 'asc');
 
             const formattedRecords = records.map((record, index) => ({

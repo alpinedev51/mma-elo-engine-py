@@ -124,6 +124,31 @@ def get_elo_records_by_fighter(db: Session, fighter_name: str, sort: str = 'asc'
         }
     )
     records = result.fetchall()
-    elo_records = [row._mapping for row in records]
-    return elo_records if elo_records else None
+    
+    fighters_data = {}
+    for row in records:
+        mapping = row._mapping
+        fighter_id = mapping['fighter_id']
+
+        if fighter_id not in fighters_data:
+            fighters_data[fighter_id] = {
+                'fighter_id': fighter_id,
+                'fighter_name': mapping['fighter_name'],
+                'total_fights': mapping['total_fights'],
+                'elo_progression': []
+            }
+
+        fighters_data[fighter_id]['elo_progression'].append({
+            'elo_record_id': mapping['id'],
+            'elo_rating': float(mapping['elo_rating']),
+            'event_name': mapping['event_name'],
+            'event_date': mapping['event_date'].isoformat() if mapping['event_date'] else None,
+            'fight_number': len(fighters_data[fighter_id]['elo_progression']) + 1
+        })
+
+    fighters_list = list(fighters_data.values())
+    # NOTE: sql function already returns sorted by fighter id
+    fighters_list.sort(key=lambda x: x['fighter_name'])
+
+    return fighters_list if fighters_list else None
 

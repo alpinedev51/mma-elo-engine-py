@@ -57,7 +57,7 @@ class FightResponse(FightBase):
     class Config:
         from_attributes = True
 
-
+# Elo Records related schemas
 class EloRecordByFighterResponse(BaseModel):
     fighter_id: int
     fighter_name: str
@@ -66,3 +66,21 @@ class EloRecordByFighterResponse(BaseModel):
     class Config:
         from_attributes = True
 
+class EloProgressionRecord(BaseModel):
+    elo_record_id: int
+    elo_rating: float
+    event_name: str | None
+    event_date: str | None
+    fight_number: int
+
+    class Config:
+        from_attributes = True
+
+class FighterEloProgressionResponse(BaseModel):
+    fighter_id: int
+    fighter_name: str
+    total_fights: int
+    elo_progression: list[EloProgressionRecord]
+
+    class Config:
+        from_attributes = True

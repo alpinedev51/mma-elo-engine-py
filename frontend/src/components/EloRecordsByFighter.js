@@ -1,19 +1,27 @@
 import React, { useState } from 'react';
-import { getEloRecordsByFighter } from '../services/apiService';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import { getEloProgressionByFighter, getEloRecordsByFighter } from '../services/apiService';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
 
 const EloRecordsByFighter = () => {
     const [fighterName, setFighterName] = useState('');
+    const [fightersData, setFightersData] = useState([]);
     const [eloRecords, setEloRecords] = useState([]);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
     const handleSearch = async () => {
+        if (!fighterName.trim()) {
+            setError('Please enter a fighter name');
+            return;
+        }
         setError('');
+        setFightersData([]);
         setEloRecords([]);
         setLoading(true);
 
         try {
+            const data = await getEloProgressionByFighter(fighterName, 'asc');
+            setFightersData(data);
             const records = await getEloRecordsByFighter(fighterName, 'asc');
 
             const formattedRecords = records.map((record, index) => ({

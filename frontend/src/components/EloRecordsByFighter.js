@@ -45,9 +45,10 @@ const EloRecordsByFighter = () => {
             {error && <p style={{ color: 'red' }}>{error}</p>}
             {eloRecords.length > 0 && (
                 <ul>
-                    <li key={record.fight}>
-                        <strong>{record.fighterName}</strong>: Elo Rating - {parseFloat(record.elo).toFixed(1)}
-                    </li>
+                    {eloRecords.map(record => (
+                        <li key={record.fight}>
+                            <strong>{record.fighterName}</strong>: Elo Rating - {parseFloat(record.elo).toFixed(1)}
+                        </li>
                 </ul>
             )}
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import Fighter from './components/Fighter';
-import EloProgressionByFighter from './components/ProgressionByFighter';
+import EloProgressionByFighter from './components/EloProgressionByFighter';
 import Events from './components/Events';
 import './style/App.css';
 import './style/Stats.css';

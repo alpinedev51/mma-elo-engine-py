@@ -49,6 +49,7 @@ const EloRecordsByFighter = () => {
                         <li key={record.fight}>
                             <strong>{record.fighterName}</strong>: Elo Rating - {parseFloat(record.elo).toFixed(1)}
                         </li>
+                    ))}
                 </ul>
             )}
 

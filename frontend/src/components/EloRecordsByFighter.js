@@ -14,13 +14,28 @@ const EloRecordsByFighter = () => {
         setLoading(true);
 
         try {
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+            const records = await getEloRecordsByFighter(fighterName, 'elo_rating', 'desc');
+            setEloRecordsByFighter(records);
+=======
+>>>>>>> Stashed changes
             const records = await getEloRecordsByFighter(fighterName, 'asc');
 
             const formattedRecords = records.map((record, index) => ({
                 fight: index,
+<<<<<<< Updated upstream
                 elo: parseFloat(record.elo_rating),
             }));
             setEloRecords(formattedRecords);
+=======
+                fighterName: record.fighter_name,
+                elo: parseFloat(record.elo_rating),
+            }));
+            setEloRecords(formattedRecords);
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
         } catch (err) {
             setError('No Elo records returned for this fighter.');
         } finally {
@@ -44,9 +59,21 @@ const EloRecordsByFighter = () => {
             {error && <p style={{ color: 'red' }}>{error}</p>}
             {eloRecords.length > 0 && (
                 <ul>
+<<<<<<< Updated upstream
                     {eloRecords.map(record => (
                         <li key={record.fight}>
                             <strong>{record.fighter_name}</strong>Elo Rating - {parseFloat(record.elo).toFixed(1)}
+=======
+<<<<<<< Updated upstream
+                    {eloRecords.map((record) => (
+                        <li key={record.id}>
+                            <strong>{record.fighter_name}</strong>: Elo Rating - {parseFloat(record.elo_rating).toFixed(1)}
+=======
+                    {eloRecords.map(record => (
+                        <li key={record.fight}>
+                            <strong>{record.fighterName}</strong>: Elo Rating - {parseFloat(record.elo).toFixed(1)}
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
                         </li>
                     ))}
                 </ul>

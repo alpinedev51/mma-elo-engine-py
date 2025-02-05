@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { getEloProgressionByFighter } from '../services/apiService';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
 
-const EloRecordsByFighter = () => {
+const EloProgressionByFighter = () => {
     const [fighterName, setFighterName] = useState('');
     const [fightersData, setFightersData] = useState([]);
     const [error, setError] = useState('');
@@ -155,4 +155,4 @@ const EloRecordsByFighter = () => {
     );
 };
 
-export default EloRecordsByFighter;
+export default EloProgressionByFighter;

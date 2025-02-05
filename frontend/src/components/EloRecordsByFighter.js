@@ -18,6 +18,7 @@ const EloRecordsByFighter = () => {
 
             const formattedRecords = records.map((record, index) => ({
                 fight: index,
+                fighterName: record.fighter_name,
                 elo: parseFloat(record.elo_rating),
             }));
             setEloRecords(formattedRecords);
@@ -46,7 +47,7 @@ const EloRecordsByFighter = () => {
                 <ul>
                     {eloRecords.map(record => (
                         <li key={record.fight}>
-                            <strong>{record.fighter_name}</strong>Elo Rating - {parseFloat(record.elo).toFixed(1)}
+                            <strong>{record.fighterName}</strong>: Elo Rating - {parseFloat(record.elo).toFixed(1)}
                         </li>
                     ))}
                 </ul>

@@ -69,7 +69,23 @@ export const getEvents = async (skip, limit, sort, order) => {
     }
 };
 
-// Function to fetch Elo records by fighter name
+//Function to fetch Elo progression by fighter
+export const getEloProgressionByFighter = async (fighterName, sort = 'asc') => {
+    try {
+        const response = await api.get('api/elo-records/search', {
+            params: {
+                fighter_name: fighterName,
+                sort: sort,
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching Elo records:', error);
+        throw error;
+    }
+}
+
+// Legacy - Function to fetch Elo records by fighter name
 export const getEloRecordsByFighter = async (fighterName, sort) => {
     try {
         const response = await api.get('api/elo-records/search', {

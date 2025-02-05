@@ -2,11 +2,12 @@
 
 ## Updates
 
-[01/05/2025]
+[02/05/2025]
 
 - Only supports UFC fights as of now.
 - Only GET API endpoints supported right now.
-- Frontend is WIP only supporting Elo records and fighter searches.
+- Frontend is very much WIP.
+- Currently working on frontend design and visualizations.
 - TODO: See Issues
 
 ## Introduction
@@ -45,7 +46,7 @@ $$
 
 To understand Elo intuitively, think of it as a way to gauge a player's skill relative to their opponents. When a player wins against a higher-rated opponent, their rating increases significantly because it indicates a strong performance. Conversely, if a lower-rated player loses to a higher-rated one, their rating decreases less dramatically.
 
-For example, if Fighter A (rated 1400) beats Fighter B (rated 1600), Fighter A’s rating will increase significantly, while Fighter B’s will decrease significantly. However if Fighter B were to beat Fighter A, then their ELOs would change, but less dramatically since this is result is closer to the estimated expected outcome.
+For example, if Fighter A (rated 1400) beats Fighter B (rated 1600), Fighter A’s rating will increase significantly, while Fighter B’s will decrease significantly. However if Fighter B were to beat Fighter A, then their ELOs would still change, but less dramatically since this is result is closer to the estimated expected outcome.
 
 ## Data Flow Diagram
 
@@ -115,18 +116,13 @@ The project is structured in a very simple full stack fashion:
 
 1. **Database**: Stores and handles the data.
 2. **Backend**: Houses the web scraper, Elo engine package, CRUD operations, and API endpoints.
-3. **Frontend**: Used for access backend API endpoints and providing a user interface.
-
-### Goals / Future Features
-
-- **Dynamic Data Sources**: Integrate data from various MMA promotions, providing a more comprehensive view of a fighter's performance.
-- **Real-Time Updates**: As fights occur, automatically update fighter ratings, ensuring that users always have access to the most current data.
+3. **Frontend**: Access backend API endpoints and providing a UI.
 
 ## Data Flow
 
 The data flow in this project can be summarized as follows:
 
-1. **Scraping**: The backend utilizes Scrapy to scrape data from various MMA-related websites. The data collected includes information about fighters, fights, events, and initializes Elo ratings for each fighter to 1000.
+1. **Scraping**: The backend utilizes Scrapy to scrape data from various MMA-related websites (currently only UFC). The data collected includes information about fighters, fights, events, and initializes Elo ratings for each fighter to 1000.
 
 2. **Processing**: After the data is scraped, it is processed and cleaned to ensure it adheres to the required schema through the Item Pipeline in Scrapy.
 
@@ -134,7 +130,7 @@ The data flow in this project can be summarized as follows:
    - **`fighters`**: Contains information about each fighter.
    - **`fights`**: Records details about each fight, including the fighters involved and the result.
    - **`events`**: Details about the events where the fights take place.
-   - **`elo_records`**: Elo history for each fighter.
+   - **`elo_records`**: Elo rating history for each fighter.
 
 4. **API Interaction**: The backend exposes API endpoints that allow users to query the database and retrieve information about fighters, fights, events, and elo ratings. Users can perform actions such as:
    - Fetching fighter statistics.
@@ -151,3 +147,8 @@ docker compose up
 ```
 
 If this is first time building and deploying, then you need to web scrape and run the Elo calculator. After the first time, this data is cached by docker, even after pruning the system and removing images. See `backend/README.md` for information on scraping and Elo score updating.
+
+## Disclaimer
+
+Disclaimer: This is a _personal side project_ that I do for _fun_ and to _learn_ :neckbeard:.
+

@@ -7,14 +7,44 @@ body {
 
 .app-container {
   display: flex;
-  height: 100vh;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #121212
 }
 
 .main-content {
   flex-grow: 1;
   padding: 20px;
-  background-color: #121212;
   overflow-y: auto;
+}
+
+.fixed-header {
+  position: fixed;
+  top:0;
+  width: 100%;
+  background-color: #1e1e1e;
+  z-index: 1000;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: #f4f4f4;
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 5px 15px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.nav-link a:hover {
+  background-color: #333;
 }
 
 .app-content-section {

@@ -3,26 +3,33 @@ import { getEloProgressionByFighter } from '../services/apiService';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
 
 const EloProgressionByFighter = () => {
-    const [fighterName, setFighterName] = useState('');
-    const [fightersData, setFightersData] = useState([]);
-    const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false);
-    const [selectedFighter, setSelectedFighter] = useState('all');
-    const [uniqueFighters, setUniqueFighters] = useState([]);
+    const [fighterName, setFighterName] = useState('');             // search input text
+    const [fightersData, setFightersData] = useState([]);           // array of fighter records
+    const [error, setError] = useState('');                         // error message
+    const [loading, setLoading] = useState(false);                  // loading state
+    const [selectedFighter, setSelectedFighter] = useState('all');  // currently selected fighter from dropdown
+    const [uniqueFighters, setUniqueFighters] = useState([]);       // fighters not found
+    const [originalData, setOriginalData] = useState([]);
 
     const handleSearch = async () => {
+        // input validation
         if (!fighterName.trim()) {
             setError('Please enter a fighter name');
             return;
         }
+
+        // reset states
         setError('');
         setFightersData([]);
         setLoading(true);
 
         try {
+            // fetch fighter data
             const data = await getEloProgressionByFighter(fighterName, 'asc');
             setFightersData(data);
+            setOriginalData(data); // store original data
 
+            // extract unique fighters for dropdown
             const fighters = data.map(fighter => ({
                 id: fighter.fighter_id,
                 name: fighter.fighter_name
@@ -30,6 +37,7 @@ const EloProgressionByFighter = () => {
             setUniqueFighters(fighters);
             setSelectedFighter('all');
         } catch (err) {
+            // error handling
             if (err.response?.status === 404) {
                 setError(`No records found for "${fighterName}"`);
             } else {
@@ -62,6 +70,17 @@ const EloProgressionByFighter = () => {
         return null;
     };
 
+    const handleFighterChange = (e) => {
+        const selectedFighterId = e.target.value;
+        setSelectedFighter(selectedFighterId);
+        if (selectedFighterId == 'all') {
+            setFightersData(originalData);
+        } else {
+            const filteredData = originalData.filter(f => f.fighter_id === parseInt(selectedFighterId));
+            setFightersData(filteredData);
+        }
+    };
+
     return (
         <div className="elo-records p-4">
             <div className="fighter-search-container">
@@ -79,16 +98,7 @@ const EloProgressionByFighter = () => {
                         <select
                             className="fighter-select"
                             value={selectedFighter}
-                            onChange={(e) => {
-                                setSelectedFighter(e.target.value);
-                                if (e.target.value === 'all') {
-                                    setFightersData(fightersData);
-                                } else {
-                                    setFightersData(fightersData.filter(f =>
-                                        f.fighter_id === parseInt(e.target.value)
-                                    ));
-                                }
-                            }}
+                            onChange={handleFighterChange}
                         >
                             <option value="all">All Fighters</option>
                             {uniqueFighters.map(fighter => (
@@ -127,7 +137,7 @@ const EloProgressionByFighter = () => {
                                     data={fighter.elo_progression.map(record => ({
                                         ...record,
                                         elo: parseFloat(record.elo_rating),
-                                        fight_number: record.fight_number
+                                        fight_number: record.fight_number - 1
                                     }))}
                                     margin={{ top: 10, right: 30, left: 20, bottom: 30 }}
                                 >
@@ -168,7 +178,7 @@ const EloProgressionByFighter = () => {
                                 <tbody>
                                     {fighter.elo_progression.map((record) => (
                                         <tr key={record.elo_record_id} className="border-b">
-                                            <td className="px-4 py-2 text-center">{record.fight_number}</td>
+                                            <td className="px-4 py-2 text-center">{record.fight_number - 1}</td>
                                             <td className="px-4 py-2 text-center">{parseFloat(record.elo_rating).toFixed(1)}</td>
                                             <td className="px-4 py-2">{record.event_name || '-'}</td>
                                             <td className="px-4 py-2">

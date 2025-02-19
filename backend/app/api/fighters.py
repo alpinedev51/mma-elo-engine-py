@@ -13,7 +13,13 @@ def get_db():
     finally:
         db.close()
 
-@router.get("/api/fighters/search", response_model=schemas.FightersListResponse, status_code=status.HTTP_200_OK)
+@router.get(
+    "/api/fighters/search", 
+    response_model=schemas.FightersListResponse,
+    status_code=status.HTTP_200_OK,
+    summary="Get fighter entries matching fighter name to string",
+    description="Returns a paginated view of each fighter with their full name and current Elo rating which have the full name partially matching the string."
+)
 def search_fighter_by_name(
         fighter_name: str,
         skip: int = 0,
@@ -52,7 +58,13 @@ def read_fighter_by_id(fighter_id: int, db: Session = Depends(get_db)):
         )
     return fighter
 
-@router.get("/api/fighters/", response_model=schemas.FightersListResponse, status_code=status.HTTP_200_OK)
+@router.get(
+    "/api/fighters/", 
+    response_model=schemas.FightersListResponse, 
+    status_code=status.HTTP_200_OK,
+    summary="Get fighters by fighter name and current Elo rating",
+    description="Returns a paginated view of each unique fighter with their full name and current Elo rating."
+)
 def read_fighters(
         skip: int = 0, 
         limit: int = 10, 

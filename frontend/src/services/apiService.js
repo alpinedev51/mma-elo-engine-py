@@ -1,12 +1,6 @@
 import axios from 'axios';
 
-const apiUrlPublic = process.env.NEXT_PUBLIC_API_URL;
-const apiUrlProd = process.env.NEXT_PUBLIC_API_URL;
-
-const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
-console.log(apiUrlPublic);
-console.log(apiUrlProd);
+const apiUrl = 'https://mma-elo-engine-backend.onrender.com' //mprocess.env.NEXT_PUBLIC_API_URL;
 
 if (!apiUrl) {
     console.warn('NEXT_PUBLIC_API_URL is not set! Falling back to localhost.');

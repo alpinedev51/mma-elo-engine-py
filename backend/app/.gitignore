@@ -9,4 +9,3 @@ __pycache__/
 *.pyd
 
 create_database.py
-init_db.py

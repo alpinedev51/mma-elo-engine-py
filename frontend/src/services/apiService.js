@@ -1,10 +1,18 @@
 import axios from 'axios';
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5050';
-console.log(apiUrl);
-// Set up base URL for API
+const apiUrlPublic = process.env.NEXT_PUBLIC_API_URL;
+const apiUrlProd = process.env.NEXT_PUBLIC_API_URL;
+
+console.log(apiUrlPublic);
+console.log(apiUrlProd);
+console.log(process.env);
+
+if (!apiUrl) {
+    console.warn('NEXT_PUBLIC_API_URL is not set! Falling back to localhost.');
+}
+
 const api = axios.create({
-    baseURL: apiUrl,
+    baseURL: apiUrl || 'http://localhost:5050',
 });
 
 // Get all fighters

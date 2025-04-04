@@ -6,7 +6,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://frontend", "https://frontend", "https://mma-elo-engine-py.vercel.app"],
+    allow_origins=["http://localhost:3000", "http://frontend", "https://frontend", "https://mma-elo-engine-py.vercel.app", "https://mma.marmotspace.com"],
     allow_credentials=True,
     allow_methods=["GET"],
     allow_headers=["Authorization", "Content-Type"]

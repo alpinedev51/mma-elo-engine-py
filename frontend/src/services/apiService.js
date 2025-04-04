@@ -5,7 +5,6 @@ const apiUrlProd = process.env.NEXT_PUBLIC_API_URL;
 
 console.log(apiUrlPublic);
 console.log(apiUrlProd);
-console.log(process.env);
 
 if (!apiUrl) {
     console.warn('NEXT_PUBLIC_API_URL is not set! Falling back to localhost.');

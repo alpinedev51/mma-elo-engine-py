@@ -124,7 +124,7 @@ def get_elo_records_by_fighter(db: Session, fighter_name: str, sort: str = 'asc'
         }
     )
     records = result.fetchall()
-    
+
     fighters_data = {}
     for row in records:
         mapping = row._mapping

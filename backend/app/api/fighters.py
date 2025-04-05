@@ -18,7 +18,8 @@ def get_db():
     response_model=schemas.FightersListResponse,
     status_code=status.HTTP_200_OK,
     summary="Get fighter entries matching fighter name to string",
-    description="Returns a paginated view of each fighter with their full name and current Elo rating which have the full name partially matching the string."
+    description="Returns a paginated view of each fighter with their full name and current Elo rating which have the full name partially matching the string.",
+    operation_id="search_fighters_by_name"
 )
 def search_fighter_by_name(
         fighter_name: str,
@@ -48,7 +49,12 @@ def search_fighter_by_name(
         "pagination": pagination
     }
 
-@router.get("/api/fighters/{fighter_id}", response_model=schemas.FighterResponse, status_code=status.HTTP_200_OK)
+@router.get(
+    "/api/fighters/{fighter_id}",
+    response_model=schemas.FighterResponse, 
+    status_code=status.HTTP_200_OK,
+    operation_id="read_fighter_by_id"
+)
 def read_fighter_by_id(fighter_id: int, db: Session = Depends(get_db)):
     fighter = crud.get_fighter_by_id(db, fighter_id)
     if fighter is None:
@@ -63,7 +69,8 @@ def read_fighter_by_id(fighter_id: int, db: Session = Depends(get_db)):
     response_model=schemas.FightersListResponse, 
     status_code=status.HTTP_200_OK,
     summary="Get fighters by fighter name and current Elo rating",
-    description="Returns a paginated view of each unique fighter with their full name and current Elo rating."
+    description="Returns a paginated view of each unique fighter with their full name and current Elo rating.",
+    operation_id="read_fighters"
 )
 def read_fighters(
         skip: int = 0, 

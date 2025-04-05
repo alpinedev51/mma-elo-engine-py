@@ -28,12 +28,6 @@ class EloRecordBase(BaseModel):
     elo_rating: float
     event_id: int
 
-class EloRecordResponse(EloRecordBase):
-    id: int
-
-    class Config:
-        from_attributes = True
-
 class EventBase(BaseModel):
     event_name: str
     event_date: datetime
@@ -57,15 +51,6 @@ class FightResponse(FightBase):
     class Config:
         from_attributes = True
 
-# Elo Records related schemas
-class EloRecordByFighterResponse(BaseModel):
-    fighter_id: int
-    fighter_name: str
-    elo_rating: float
-
-    class Config:
-        from_attributes = True
-
 class EloProgressionRecord(BaseModel):
     elo_record_id: int
     elo_rating: float
@@ -84,3 +69,8 @@ class FighterEloProgressionResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+class PaginatedFighterEloProgressionResponse(BaseModel):
+    data: List[FighterEloProgressionResponse]
+    total_count: int
+    pagination: Pagination

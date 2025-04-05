@@ -17,7 +17,7 @@ def get_db():
 
 @router.get(
             "/api/elo-records/search",
-            response_model=List[schemas.PaginatedFighterEloProgressionResponse],
+            response_model=schemas.PaginatedFighterEloProgressionResponse,
             status_code=status.HTTP_200_OK,
             summary="Get Elo rating progression for fighters",
             description="Retrieve Elo rating history for fighters matching the search term. Returns grouped data by fighter with their Elo progression."
